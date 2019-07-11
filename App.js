@@ -11,6 +11,9 @@ import PetShopScreen from "./src/screens/Care/PetShop";
 import VeterinarioScreen from "./src/screens/Care/Veterinario";
 import VacinasScreen from "./src/screens/Care/Vacinas";
 
+import DadosPetScreen from "./src/screens/SideDrawer/DadosPet";
+import DadosUserScreen from "./src/screens/SideDrawer/DadosUser";
+
 Navigation.registerComponent("snapet.AuthScreen", () => AuthScreen)
 Navigation.registerComponent("snapet.HomeScreen", () => HomeScreen)
 Navigation.registerComponent("snapet.FoodScreen", () => FoodScreen)
@@ -22,7 +25,10 @@ Navigation.registerComponent("snapet.PetShopScreen", () => PetShopScreen)
 Navigation.registerComponent("snapet.VeterinarioScreen", () => VeterinarioScreen)
 Navigation.registerComponent("snapet.VacinasScreen", () => VacinasScreen)
 
-Navigation.startSingleScreenApp({
+Navigation.registerComponent("snapet.DadosPetScreen", () => DadosPetScreen)
+Navigation.registerComponent("snapet.DadosUserScreen", () => DadosUserScreen)
+
+export default () =>  Navigation.startSingleScreenApp({
   screen: {
     screen: "snapet.AuthScreen",
     title: "Login"

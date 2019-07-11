@@ -10,8 +10,29 @@ import {
 
 import DrawerButton from '../../Components/UI/DrawerButton';
 import Icon from "react-native-vector-icons/Ionicons";
+import App from "../../../App";
 
 class SideDrawer extends Component {
+
+
+  goToDadosPet = () => {
+    this.props.navigator.showModal({
+      screen: "snapet.DadosPetScreen",
+      title: "Dados Pet",
+    });
+  }
+
+  goToDadosUser = () => {
+    this.props.navigator.showModal({
+      screen: "snapet.DadosUserScreen",
+      title: "Dados Pet",
+    });
+  }
+
+  gotToRoot = () => {
+    App();
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -21,9 +42,9 @@ class SideDrawer extends Component {
           <Text style={styles.headerText}>Tasso Barbosa</Text>
         </View>
 
-        <DrawerButton name='Dados Pet' iconName='md-paw' onPress={this.goToVeterinario}/>
-        <DrawerButton name='Configurar conta' iconName='md-settings' onPress={this.goToPetshop}/>
-        <DrawerButton name='Sair' iconName='md-log-out' onPress={this.goToVacinas}/>
+        <DrawerButton name='Dados Pet' iconName='md-paw' onPress={this.goToDadosPet}/>
+        <DrawerButton name='Configurar conta' iconName='md-settings' onPress={this.goToDadosUser}/>
+        <DrawerButton name='Sair' iconName='md-log-out' onPress={this.gotToRoot}/>
       </View>
     );
   }
