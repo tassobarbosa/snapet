@@ -25,12 +25,34 @@ class CareScreen extends Component {
       }
     }
   }
+
+  goToPetshop = () => {
+    this.props.navigator.push({
+      screen: "snapet.PetShopScreen",
+      title: "Banho e Tosa",
+    });
+  }
+
+  goToVeterinario = () => {
+    this.props.navigator.push({
+      screen: "snapet.VeterinarioScreen",
+      title: "Veterinario",
+    });
+  }
+
+  goToVacinas = () => {
+    this.props.navigator.push({
+      screen: "snapet.VacinasScreen",
+      title: "Vacinas",
+    });
+  }
+
   render(){
     return(
       <View style={styles.container}>
-        <CareButton name='Vacinas' iconName='md-pulse'/>
-        <CareButton name='Banho' iconName='md-cut'/>
-        <CareButton name='Veterinario' iconName='md-medkit'/>
+        <CareButton name='Banho e Tosa' iconName='md-cut' onPress={this.goToPetshop}/>
+        <CareButton name='Veterinário' iconName='md-medkit' onPress={this.goToVeterinario}/>
+        <CareButton name='Cartão de vacinas' iconName='md-pulse' onPress={this.goToVacinas}/>
       </View>
     );
   }
