@@ -24,7 +24,7 @@ Navigation.registerComponent("snapet.VacinasScreen", () => VacinasScreen)
 
 Navigation.startSingleScreenApp({
   screen: {
-    screen: "snapet.CareScreen",
+    screen: "snapet.AuthScreen",
     title: "Login"
   }
 });

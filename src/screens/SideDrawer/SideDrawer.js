@@ -8,59 +8,22 @@ import {
   Platform
 } from "react-native";
 
+import DrawerButton from '../../Components/UI/DrawerButton';
 import Icon from "react-native-vector-icons/Ionicons";
 
 class SideDrawer extends Component {
   render() {
     return (
-      <View
-        style={[
-          styles.container,
-          { width: Dimensions.get("window").width * 0.7 }
-        ]}
-      >
-        <View style={[styles.drawerItem, {backgroundColor: "white"}]}>
-          <Icon
-            name="md-contact"
-            size={50}
-            color="#aaa"
-            style={styles.drawerItemIcon}
-          />
-          <Text style={styles.drawerItemText}>Tasso Barbosa</Text>
+      <View style={styles.container}>
+
+        <View style={styles.headerContainer}>
+          <Icon name="md-contact" size={50} color="#aaa" style={styles.headerIcon}/>
+          <Text style={styles.headerText}>Tasso Barbosa</Text>
         </View>
-        <TouchableOpacity onPress={this.props.onLogout}>
-          <View style={styles.drawerItem}>
-            <Icon
-              name="md-settings"
-              size={30}
-              color="#aaa"
-              style={styles.drawerItemIcon}
-            />
-            <Text>Configurar conta</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={this.props.onLogout}>
-          <View style={styles.drawerItem}>
-            <Icon
-              name="md-paw"
-              size={30}
-              color="#aaa"
-              style={styles.drawerItemIcon}
-            />
-            <Text>Configurar dados Pet</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={this.props.onLogout}>
-          <View style={styles.drawerItem}>
-            <Icon
-              name="md-log-out"
-              size={30}
-              color="#aaa"
-              style={styles.drawerItemIcon}
-            />
-            <Text>Sair</Text>
-          </View>
-        </TouchableOpacity>
+
+        <DrawerButton name='Dados Pet' iconName='md-paw' onPress={this.goToVeterinario}/>
+        <DrawerButton name='Configurar conta' iconName='md-settings' onPress={this.goToPetshop}/>
+        <DrawerButton name='Sair' iconName='md-log-out' onPress={this.goToVacinas}/>
       </View>
     );
   }
@@ -71,21 +34,23 @@ const styles = StyleSheet.create({
   container: {
     paddingTop: 50,
     backgroundColor: "white",
-    flex: 1
+    flex: 1,
+    width: Dimensions.get("window").width * 0.7
   },
-  drawerItem: {
+  headerContainer: {
     flexDirection: "row",
     alignItems: "center",
     padding: 10,
-    backgroundColor: "#eee"
+    backgroundColor: "#eee",
+    borderWidth: 0.5,
+    borderColor: '#d6d7da',
   },
-  drawerItemIcon: {
-    marginRight: 10
+  headerIcon: {
+    marginRight: 20
   },
-  drawerItemText: {
+  headerText: {
     fontSize: 18,
-    fontWeight: 'bold',    
-  }
+  },
 });
 
 export default SideDrawer;
