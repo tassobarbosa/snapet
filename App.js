@@ -16,7 +16,7 @@ Navigation.registerComponent("snapet.SideDrawer", () => SideDrawer)
 
 Navigation.startSingleScreenApp({
   screen: {
-    screen: "snapet.AuthScreen",
+    screen: "snapet.CareScreen",
     title: "Login"
   }
 });

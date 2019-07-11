@@ -15,7 +15,7 @@ const startTabs = () => {
         {
           screen: "snapet.HomeScreen",
           label: "Home",
-          title: "Home Place",
+          title: "snaPet",          
           icon: sources[0],
           navigatorButtons: {
             leftButtons: [

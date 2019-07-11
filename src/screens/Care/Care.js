@@ -1,7 +1,14 @@
 import React, {Component} from 'react';
-import {View, Text} from 'react-native';
+import {
+  View,
+  Text,
+  Dimensions,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
 
-//import startMainTabs from '../MainTabs/startMainTabs';
+import CareButton from '../../Components/UI/CareButton';
+
 
 class CareScreen extends Component {
   constructor(props){
@@ -20,11 +27,21 @@ class CareScreen extends Component {
   }
   render(){
     return(
-      <View>
-        <Text>Care Screen</Text>
+      <View style={styles.container}>
+        <CareButton name='Vacinas' iconName='md-pulse'/>
+        <CareButton name='Banho' iconName='md-cut'/>
+        <CareButton name='Veterinario' iconName='md-medkit'/>
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    paddingTop: 50,
+    backgroundColor: "white",
+    flex: 1
+  }
+});
 
 export default CareScreen;
