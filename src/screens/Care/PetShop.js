@@ -15,10 +15,8 @@ class PetShopScreen extends Component {
 
   onNavigatorEvent = event => {
     if(event.type === "NavBarButtonPress"){
-      if(event.id === "sideDrawerToggle"){
-        this.props.navigator.toggleDrawer({
-          side: "left"
-        })
+      if(event.id === "addPetshopEvent"){
+        console.log("Adiciona ai")
       }
     }
   }
@@ -26,7 +24,7 @@ class PetShopScreen extends Component {
   render(){
     return(
       <View style={styles.container}>
-        <Text> PET SHOP</Text>
+        <Text>PET SHOP</Text>
       </View>
     );
   }

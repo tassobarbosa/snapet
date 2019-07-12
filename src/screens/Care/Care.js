@@ -8,7 +8,7 @@ import {
 } from "react-native";
 
 import CareButton from '../../Components/UI/CareButton';
-
+import Icon from "react-native-vector-icons/Ionicons";
 
 class CareScreen extends Component {
   constructor(props){
@@ -27,10 +27,23 @@ class CareScreen extends Component {
   }
 
   goToPetshop = () => {
-    this.props.navigator.push({
-      screen: "snapet.PetShopScreen",
-      title: "Banho e Tosa",
-    });
+    Promise.all([
+      Icon.getImageSource("md-add", 30)
+    ]).then(sources => {
+      this.props.navigator.push({
+        screen: "snapet.PetShopScreen",
+        title: "Banho e Tosa",
+        navigatorButtons: {
+          rightButtons: [
+            {
+              icon: sources[0],
+              title: "addPetshop",
+              id: "addPetshopEvent"
+            }
+          ]
+        }
+      })
+    })
   }
 
   goToVeterinario = () => {
