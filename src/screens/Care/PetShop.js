@@ -7,16 +7,30 @@ import {
   TouchableOpacity,
 } from "react-native";
 
+import ModalAddEvent from "../../Components/ModalAddEvent";
+
 class PetShopScreen extends Component {
   constructor(props){
     super(props);
     this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent);
   }
 
+  state = {
+    addingEvent: null
+  };
+
+  modalClosedHandler = () => {
+    this.setState({
+      addingEvent: null
+    });
+  };
+
   onNavigatorEvent = event => {
     if(event.type === "NavBarButtonPress"){
       if(event.id === "addPetshopEvent"){
-        console.log("Adiciona ai")
+        this.setState({
+          addingEvent: true
+        });
       }
     }
   }
@@ -24,6 +38,11 @@ class PetShopScreen extends Component {
   render(){
     return(
       <View style={styles.container}>
+        <ModalAddEvent
+          name='HALLO'
+          addingEvent={this.state.addingEvent}
+          onModalClosed={this.modalClosedHandler}
+        />
         <Text>PET SHOP</Text>
       </View>
     );
