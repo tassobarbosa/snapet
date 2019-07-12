@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {
   View,
   Text,
+  Button,
   Dimensions,
   StyleSheet,
   TouchableOpacity,
@@ -25,6 +26,12 @@ class PetShopScreen extends Component {
     });
   };
 
+  modalOpenHandler = () => {
+    this.setState({
+      addingEvent: true
+    });
+  };
+
   onNavigatorEvent = event => {
     if(event.type === "NavBarButtonPress"){
       if(event.id === "addPetshopEvent"){
@@ -44,6 +51,7 @@ class PetShopScreen extends Component {
           onModalClosed={this.modalClosedHandler}
         />
         <Text>PET SHOP</Text>
+        <Button title="Open" onPress={this.modalOpenHandler} />
       </View>
     );
   }

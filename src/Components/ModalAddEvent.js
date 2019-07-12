@@ -11,8 +11,7 @@ const modalAddEvent = props => {
     >
       <View style={styles.modalContainer}>
         <Image source={require("../Assets/Images/banho-tosa.jpeg")} style={styles.eventImage} />
-        <Text style={styles.eventName}>{props.name}</Text>
-        <Button title="Delete" color="red" onPress={props.onItemDeleted} />
+        <Text style={styles.eventName}>{props.name}</Text>        
         <Button title="Close" onPress={props.onModalClosed} />
       </View>
     </Modal>
