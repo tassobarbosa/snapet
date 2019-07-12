@@ -1,5 +1,6 @@
 import React from "react";
 import { Modal, View, Image, Text, Button, StyleSheet } from "react-native";
+import CloseButton from './UI/CloseButton';
 
 const modalAddEvent = props => {
 
@@ -10,9 +11,12 @@ const modalAddEvent = props => {
       animationType="slide"
     >
       <View style={styles.modalContainer}>
+        <View style={styles.buttonContainer}>
+          <CloseButton onPress={props.onModalClosed} />
+          <Button title="Salvar"/>
+        </View>
         <Image source={require("../Assets/Images/banho-tosa.jpeg")} style={styles.eventImage} />
-        <Text style={styles.eventName}>{props.name}</Text>        
-        <Button title="Close" onPress={props.onModalClosed} />
+        <Text style={styles.eventName}>{props.name}</Text>
       </View>
     </Modal>
   );
@@ -21,6 +25,13 @@ const modalAddEvent = props => {
 const styles = StyleSheet.create({
   modalContainer: {
     margin: 22
+  },
+  buttonContainer: {
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 10
+    //alignItems: "center"
   },
   eventImage: {
     width: "100%",
