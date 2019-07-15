@@ -1,29 +1,36 @@
-import React from "react";
+import React, {Component}  from "react";
 import { Modal, View, Image, Text, Button, StyleSheet } from "react-native";
 import CloseButton from './UI/CloseButton';
 import EventDataForm from './EventDataForm';
 
-const modalAddEvent = props => {
+export default class ModalAddEvent extends Component {
+  constructor(props) {
+    super(props);
+  }
 
-  return (
-    <Modal
-      onRequestClose={props.onModalClosed}
-      visible={props.addingEvent !== null}
-      animationType="slide"
-    >
-      <View style={styles.modalContainer}>
-        <View style={styles.buttonContainer}>
-          <CloseButton onPress={props.onModalClosed} />
-          <Button title="Salvar"/>
-        </View>
-        <EventDataForm
-          formImage={props.eventImage}
-          formName={props.eventName}
-          placeholder="Quanto será pago?"
-        />
+  render(){
+    return (
+      <View>
+        <Modal
+          onRequestClose={this.props.onModalClosed}
+          visible={this.props.addingEvent !== null}
+          animationType="slide"
+        >
+          <View style={styles.modalContainer}>
+            <View style={styles.buttonContainer}>
+              <CloseButton onPress={this.props.onModalClosed} />
+              <Button title="Salvar"/>
+            </View>
+            <EventDataForm
+              formImage={this.props.eventImage}
+              formName={this.props.eventName}
+              placeholder="Quanto será pago?"
+            />
+          </View>
+        </Modal>
       </View>
-    </Modal>
-  );
+    );
+  }
 };
 
 const styles = StyleSheet.create({
@@ -38,5 +45,3 @@ const styles = StyleSheet.create({
     //alignItems: "center"
   },
 });
-
-export default modalAddEvent;
