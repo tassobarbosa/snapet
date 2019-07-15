@@ -1,6 +1,7 @@
 import React from "react";
 import { Modal, View, Image, Text, Button, StyleSheet } from "react-native";
 import CloseButton from './UI/CloseButton';
+import EventDataForm from './EventDataForm';
 
 const modalAddEvent = props => {
 
@@ -15,8 +16,9 @@ const modalAddEvent = props => {
           <CloseButton onPress={props.onModalClosed} />
           <Button title="Salvar"/>
         </View>
-        <Image source={require("../Assets/Images/banho-tosa.jpeg")} style={styles.eventImage} />
+        <Image source={require("../assets/Images/banho-tosa.jpeg")} style={styles.eventImage} />
         <Text style={styles.eventName}>{props.name}</Text>
+        <EventDataForm placeholder="Quanto será pago?"/>
       </View>
     </Modal>
   );

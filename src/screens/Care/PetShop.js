@@ -46,7 +46,7 @@ class PetShopScreen extends Component {
     return(
       <View style={styles.container}>
         <ModalAddEvent
-          name='HALLO'
+          name='Hora de ir ao Pet :)'
           addingEvent={this.state.addingEvent}
           onModalClosed={this.modalClosedHandler}
         />
