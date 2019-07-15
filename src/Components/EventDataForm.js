@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import {
   StyleSheet,
   TextInput,
+  Image,
   Text,
   View,
   TouchableOpacity,
@@ -64,11 +65,19 @@ export default class EventDataForm extends Component {
   };
 
   render(){
+
+    const source = this.mapKeyToImagePath(this.props.formImage);
+
     return(
-      <View>
+      <View style={styles.formContainer}>
+
+        <Image source={source} style={styles.eventImage} />
+
+        <Text style={styles.eventName}>{this.props.formName}</Text>
+
           <TouchableOpacity onPress={() => this.setDateAndroid()}>
-            <View>
-              <Icon name="ios-calendar" size={25} color="rgb(49, 49, 49)" />
+            <View style={styles.pickerContainer}>
+              <Icon name="ios-calendar" size={25} style={styles.iconPicker}/>
               <Text style={{ fontSize: 16 }}>
                 {this.state.androidDate}
               </Text>
@@ -76,8 +85,8 @@ export default class EventDataForm extends Component {
           </TouchableOpacity>
 
           <TouchableOpacity onPress={() => this.setTimeAndroid()}>
-            <View>
-              <Icon name="ios-time" size={25} color="rgb(49, 49, 49)" />
+            <View style={styles.pickerContainer}>
+              <Icon name="ios-time" size={25} style={styles.iconPicker}/>
               <Text style={{fontSize: 16 }}>
                 {this.state.chosenAndroidTime}
               </Text>
@@ -85,7 +94,7 @@ export default class EventDataForm extends Component {
           </TouchableOpacity>
 
           <TextInput
-              style={{height: 40}}
+              style={styles.inputText}
               placeholder={this.props.placeholder}
               onChangeText={(valor) => this.setState({valor})}
               value={this.state.valor}
@@ -95,4 +104,48 @@ export default class EventDataForm extends Component {
       </View>
     )
   }
+
+  mapKeyToImagePath(key) {
+    return {
+      banho_bg: require("../assets/Images/banho-tosa.jpeg"),
+      //doses_bg: require('../Images/Products/doses_bg.png'),
+      //shots_bg: require('../Images/Products/shots_bg.png'),
+    }[key];
+  }
+
 }
+
+const styles = StyleSheet.create({
+  formContainer: {
+    paddingTop: 10,
+  },
+  eventImage: {
+    width: "100%",
+    height: 200,
+    paddingBottom: 20,
+  },
+  eventName: {
+    fontWeight: "bold",
+    textAlign: "center",
+    fontSize: 28,
+    paddingBottom: 10,
+  },
+  pickerContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    padding: 10,
+    backgroundColor: "#eee",
+    borderWidth: 0.5,
+    borderColor: '#d6d7da',
+  },
+  iconPicker: {
+    marginRight: 20
+  },
+  inputText: {
+    fontSize: 18,
+  },
+  rightIcon: {
+    position: 'absolute',
+    right: 20,
+  }
+});

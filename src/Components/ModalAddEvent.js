@@ -16,9 +16,11 @@ const modalAddEvent = props => {
           <CloseButton onPress={props.onModalClosed} />
           <Button title="Salvar"/>
         </View>
-        <Image source={require("../assets/Images/banho-tosa.jpeg")} style={styles.eventImage} />
-        <Text style={styles.eventName}>{props.name}</Text>
-        <EventDataForm placeholder="Quanto será pago?"/>
+        <EventDataForm
+          formImage={props.eventImage}
+          formName={props.eventName}
+          placeholder="Quanto será pago?"
+        />
       </View>
     </Modal>
   );
@@ -35,15 +37,6 @@ const styles = StyleSheet.create({
     marginBottom: 10
     //alignItems: "center"
   },
-  eventImage: {
-    width: "100%",
-    height: 200
-  },
-  eventName: {
-    fontWeight: "bold",
-    textAlign: "center",
-    fontSize: 28
-  }
 });
 
 export default modalAddEvent;
