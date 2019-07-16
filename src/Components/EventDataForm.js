@@ -39,6 +39,7 @@ export default class EventDataForm extends Component {
       });
       if (action !== DatePickerAndroid.dismissedAction) {
         this.setState({ androidDate: `${day}/${month + 1}/${year}` });
+        this.onUpdateDate();
       }
     } catch ({ code, message }) {
       console.warn('Cannot open date picker', message);
@@ -58,11 +59,26 @@ export default class EventDataForm extends Component {
         const h = (hour < 10) ? `0${hour}` : hour;
         console.log(`time: ${hour}:${minute}`);
         this.setState({ chosenAndroidTime: `${h}:${m}` });
+        this.onUpdateTime();
       }
     } catch ({ code, message }) {
       console.warn('Cannot open time picker', message);
     }
   };
+
+  onUpdateValue(valor){
+    this.setState({valor});
+    this.props.currentEventValue(valor);
+  }
+
+  onUpdateTime(){
+    this.props.currentEventTime(this.state.chosenAndroidTime);
+  }
+
+  onUpdateDate(){
+    this.props.currentEventDate(this.state.androidDate);
+  }
+
 
   render(){
 
@@ -96,7 +112,7 @@ export default class EventDataForm extends Component {
           <TextInput
               style={styles.inputText}
               placeholder={this.props.placeholder}
-              onChangeText={(valor) => this.setState({valor})}
+              onChangeText={valor => this.onUpdateValue(valor)}
               value={this.state.valor}
             />
 

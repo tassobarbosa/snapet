@@ -6,6 +6,27 @@ import EventDataForm from './EventDataForm';
 export default class ModalAddEvent extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+        valor: '',
+        chosenTime: '',
+        chosenDate: ''
+      };
+  }
+
+  updateValue(valor){
+    this.setState({valor});
+  }
+
+  updateTime(chosenTime){
+    this.setState({chosenTime});
+  }
+
+  updateDate(chosenDate){
+    this.setState({chosenDate});
+  }
+
+  submitHandler(){
+    console.log("hey")
   }
 
   render(){
@@ -19,13 +40,19 @@ export default class ModalAddEvent extends Component {
           <View style={styles.modalContainer}>
             <View style={styles.buttonContainer}>
               <CloseButton onPress={this.props.onModalClosed} />
-              <Button title="Salvar"/>
+              <Button title="Salvar" onPress={this.submitHandler}/>
             </View>
             <EventDataForm
               formImage={this.props.eventImage}
               formName={this.props.eventName}
               placeholder="Quanto será pago?"
+              currentEventValue={this.updateValue.bind(this)}
+              currentEventTime={this.updateTime.bind(this)}
+              currentEventDate={this.updateDate.bind(this)}
             />
+            <Text>Valor: {this.state.valor}</Text>
+            <Text>Tempo: {this.state.chosenTime}</Text>
+            <Text>Data: {this.state.chosenDate}</Text>
           </View>
         </Modal>
       </View>
