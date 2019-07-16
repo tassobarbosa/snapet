@@ -3,6 +3,8 @@ import { Modal, View, Image, Text, Button, StyleSheet } from "react-native";
 import CloseButton from './UI/CloseButton';
 import EventDataForm from './EventDataForm';
 
+import { serverUrl } from '../Config/Settings.js'
+
 export default class ModalAddEvent extends Component {
   constructor(props) {
     super(props);
@@ -25,8 +27,34 @@ export default class ModalAddEvent extends Component {
     this.setState({chosenDate});
   }
 
-  submitHandler(){
-    console.log("hey")
+  submitHandler = () => {
+    console.log("hey");
+
+    fetch(serverUrl+this.props.eventAddress+".json",{
+      method: "POST",
+      body: JSON.stringify({
+        valor: this.state.valor,
+        chosenTime: this.state.chosenTime,
+        chosenDate: this.state.chosenDate
+      })
+    })
+    .catch(err => console.log(err))
+    .then(res => res.json())
+    .then(parsedRes => {
+      console.log(parsedRes);
+    });
+
+
+    this.props.superClose(false);
+    this.clearState();
+  }
+
+  clearState(){
+    this.setState({
+      valor: '',
+      chosenTime: '',
+      chosenDate: ''
+    });
   }
 
   render(){

@@ -20,6 +20,12 @@ class PetShopScreen extends Component {
     addingEvent: null
   };
 
+  modalSuperClose(e){
+    this.setState({
+      addingEvent: null
+    });
+  }
+
   modalClosedHandler = () => {
     this.setState({
       addingEvent: null
@@ -48,8 +54,10 @@ class PetShopScreen extends Component {
         <ModalAddEvent
           eventImage='banho_bg'
           eventName='Hora de ir ao Pet :)'
+          eventAddress='/petshop'
           addingEvent={this.state.addingEvent}
           onModalClosed={this.modalClosedHandler}
+          superClose={this.modalSuperClose.bind(this)}
         />
         <Text>PET SHOP</Text>
         <Button title="Open" onPress={this.modalOpenHandler} />
