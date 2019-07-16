@@ -4,10 +4,13 @@ import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 const listItem = (props) => (
   <TouchableOpacity>
     <View style={styles.listItem}>
-        <Text>{props.eventName}</Text>
-        <Text>{props.eventTime}</Text>
-        <Text>{props.eventDate}</Text>
-        <Text>{props.eventValue}</Text>
+      <View>
+        <Text style={styles.textItem}>{props.eventDate}</Text>
+        <Text style={styles.textItem}>{props.eventTime}</Text>
+      </View>
+      <View>
+        <Text style={styles.textItem}>Valor: {props.eventValue}</Text>
+      </View>
     </View>
   </TouchableOpacity>
 );
@@ -15,11 +18,15 @@ const listItem = (props) => (
 const styles = StyleSheet.create({
     listItem: {
         width: "100%",
-        marginBottom: 5,
-        padding: 10,
+        padding: 5,
         backgroundColor: "#eee",
         flexDirection: "row",
-        alignItems: "center"
+        justifyContent: "space-between",
+        alignItems: "center",
+    },
+    textItem: {
+      fontSize: 18,
+      fontWeight: 'bold'
     },
     placeImage: {
       marginRight: 8,

@@ -11,7 +11,6 @@ const eventList = props => {
           keyExtractor={item => item.key}
           renderItem={(info) => (
             <ListItem
-              eventName={info.item.name}
               eventDate={info.item.chosenDate}
               eventTime={info.item.chosenTime}
               eventValue={info.item.value}
