@@ -9,6 +9,7 @@ import {
 } from "react-native";
 
 import ModalAddEvent from "../../Components/ModalAddEvent";
+import EventList from "../../Components/EventList";
 
 class PetShopScreen extends Component {
   constructor(props){
@@ -17,7 +18,23 @@ class PetShopScreen extends Component {
   }
 
   state = {
-    addingEvent: null
+    addingEvent: null,
+    events: [
+      {
+        key: 't34',
+        name: 'pet',
+        value: '35',
+        chosenTime: '14:34',
+        chosenDate: '02/03/1999'
+      },
+      {
+        key: 'b14',
+        name: 'pet',
+        value: '23',
+        chosenTime: '11:23',
+        chosenDate: '07/03/1934'
+      }
+    ]
   };
 
   modalSuperClose(e){
@@ -48,6 +65,14 @@ class PetShopScreen extends Component {
     }
   }
 
+renderEventList(){
+  return(
+    <EventList
+      events={this.state.events}
+    />
+  )
+}
+
   render(){
     return(
       <View style={styles.container}>
@@ -59,7 +84,7 @@ class PetShopScreen extends Component {
           onModalClosed={this.modalClosedHandler}
           superClose={this.modalSuperClose.bind(this)}
         />
-        <Text>PET SHOP</Text>
+        {this.renderEventList()}
         <Button title="Open" onPress={this.modalOpenHandler} />
       </View>
     );
