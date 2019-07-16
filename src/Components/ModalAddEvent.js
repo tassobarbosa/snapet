@@ -9,14 +9,14 @@ export default class ModalAddEvent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        valor: '',
+        value: '',
         chosenTime: '',
         chosenDate: ''
       };
   }
 
-  updateValue(valor){
-    this.setState({valor});
+  updateValue(value){
+    this.setState({value});
   }
 
   updateTime(chosenTime){
@@ -33,9 +33,10 @@ export default class ModalAddEvent extends Component {
     fetch(serverUrl+this.props.eventAddress+".json",{
       method: "POST",
       body: JSON.stringify({
-        valor: this.state.valor,
+        key: Math.random().toString(),
+        value: this.state.value,
         chosenTime: this.state.chosenTime,
-        chosenDate: this.state.chosenDate
+        chosenDate: this.state.chosenDate,
       })
     })
     .catch(err => console.log(err))
@@ -51,7 +52,7 @@ export default class ModalAddEvent extends Component {
 
   clearState(){
     this.setState({
-      valor: '',
+      value: '',
       chosenTime: '',
       chosenDate: ''
     });
@@ -78,7 +79,7 @@ export default class ModalAddEvent extends Component {
               currentEventTime={this.updateTime.bind(this)}
               currentEventDate={this.updateDate.bind(this)}
             />
-            <Text>Valor: {this.state.valor}</Text>
+            <Text>value: {this.state.value}</Text>
             <Text>Tempo: {this.state.chosenTime}</Text>
             <Text>Data: {this.state.chosenDate}</Text>
           </View>

@@ -19,22 +19,7 @@ class PetShopScreen extends Component {
 
   state = {
     addingEvent: null,
-    events: [
-      {
-        key: 't34',
-        name: 'pet',
-        value: '35',
-        chosenTime: '14:34',
-        chosenDate: '02/03/1999'
-      },
-      {
-        key: 'b14',
-        name: 'pet',
-        value: '23',
-        chosenTime: '11:23',
-        chosenDate: '07/03/1934'
-      }
-    ]
+    events: []
   };
 
   modalSuperClose(e){
@@ -64,6 +49,31 @@ class PetShopScreen extends Component {
       }
     }
   }
+
+  componentDidMount() {
+      this.getEvents();
+  }
+
+  getEvents = () => {
+    fetch("https://teste3-235e2.firebaseio.com/petshop.json")
+    .then(res => res.json())
+    .then(parsedRes => {
+      console.log(parsedRes)
+      const dataEvents = [];
+      for(let key in parsedRes){
+        dataEvents.push({
+          ...parsedRes[key]
+        })
+      }
+
+      this.setState(prevState => {
+        return {
+          events: prevState.events.concat(...dataEvents)
+        };
+      });
+    })
+  }
+
 
 renderEventList(){
   return(

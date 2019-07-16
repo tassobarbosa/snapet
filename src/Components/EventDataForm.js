@@ -22,7 +22,7 @@ export default class EventDataForm extends Component {
         chosenDate: new Date(),
         chosenAndroidTime: '00:00',
         androidDate: `${new Date().getUTCDate()}/${new Date().getUTCMonth() + 1}/${new Date().getUTCFullYear()}`,
-        valor: '',
+        value: '',
       };
   }
   setDate(newDate) {
@@ -66,9 +66,9 @@ export default class EventDataForm extends Component {
     }
   };
 
-  onUpdateValue(valor){
-    this.setState({valor});
-    this.props.currentEventValue(valor);
+  onUpdateValue(value){
+    this.setState({value});
+    this.props.currentEventValue(value);
   }
 
   onUpdateTime(){
@@ -112,8 +112,8 @@ export default class EventDataForm extends Component {
           <TextInput
               style={styles.inputText}
               placeholder={this.props.placeholder}
-              onChangeText={valor => this.onUpdateValue(valor)}
-              value={this.state.valor}
+              onChangeText={value => this.onUpdateValue(value)}
+              value={this.state.value}
             />
 
 
