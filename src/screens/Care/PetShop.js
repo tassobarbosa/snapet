@@ -94,7 +94,6 @@ renderEventList(){
         />
         <ModalTitle />
         {this.renderEventList()}
-        <Button title="Open" onPress={this.modalOpenHandler} />
       </View>
     );
   }
@@ -102,8 +101,7 @@ renderEventList(){
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 50,
-    backgroundColor: "white",
+    backgroundColor: "#eee",
     flex: 1
   }
 });

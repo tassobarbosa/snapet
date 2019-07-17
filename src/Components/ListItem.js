@@ -19,10 +19,12 @@ const styles = StyleSheet.create({
     listItem: {
         width: "100%",
         padding: 5,
-        backgroundColor: "#eee",
+        backgroundColor: "white",
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
+        borderWidth: 0.5,
+        borderColor: '#d6d7da',
     },
     textItem: {
       fontSize: 18,
