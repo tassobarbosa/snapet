@@ -60,7 +60,7 @@ class PetShopScreen extends Component {
   }
 
   getEvents = () => {
-    fetch("https://teste3-235e2.firebaseio.com/petshop.json")
+    fetch(serverUrl+"petshop.json")
     .then(res => res.json())
     .then(parsedRes => {
       console.log(parsedRes)

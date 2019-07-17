@@ -47,10 +47,23 @@ class CareScreen extends Component {
   }
 
   goToVeterinario = () => {
-    this.props.navigator.push({
-      screen: "snapet.VeterinarioScreen",
-      title: "Veterinario",
-    });
+    Promise.all([
+      Icon.getImageSource("md-add", 30)
+    ]).then(sources => {
+      this.props.navigator.push({
+        screen: "snapet.VeterinarioScreen",
+        title: "Veterinario",
+        navigatorButtons: {
+          rightButtons: [
+            {
+              icon: sources[0],
+              title: "addVeterinario",
+              id: "addVeterinarioEvent"
+            }
+          ]
+        }
+      })
+    })
   }
 
   goToVacinas = () => {
