@@ -30,7 +30,7 @@ Navigation.registerComponent("snapet.DadosUserScreen", () => DadosUserScreen)
 
 export default () =>  Navigation.startSingleScreenApp({
   screen: {
-    screen: "snapet.PetShopScreen",
+    screen: "snapet.AuthScreen",
     title: "Login"
   }
 });

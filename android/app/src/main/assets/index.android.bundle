@@ -1477,7 +1477,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
   };
 
   exports.default = _default;
-},2,[1,3,581,633,634,635,637,638,640,648,649,650,651],"App.js");
+},2,[1,3,581,633,634,635,637,638,640,649,650,651,652],"App.js");
 __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
   module.exports = _$$_REQUIRE(_dependencyMap[0], "./deprecated/indexDeprecated");
 },3,[4],"node_modules/react-native-navigation/src/index.js");
@@ -106111,6 +106111,10 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
 
   var _EventList = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[12], "../../Components/EventList"));
 
+  var _ModalTitle = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[13], "../../Components/UI/ModalTitle"));
+
+  var _Settings = _$$_REQUIRE(_dependencyMap[14], "../../Config/Settings.js");
+
   var _jsxFileName = "/home/tassoeb/tcc/snapet/src/screens/Care/PetShop.js";
 
   function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { keys.push.apply(keys, Object.getOwnPropertySymbols(object)); } if (enumerableOnly) keys = keys.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); return keys; }
@@ -106179,16 +106183,37 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           var dataEvents = [];
 
           for (var key in parsedRes) {
-            dataEvents.push(_objectSpread({}, parsedRes[key]));
+            dataEvents.push(_objectSpread({}, parsedRes[key], {
+              key: key
+            }));
           }
 
-          _this.setState(function (prevState) {
-            var _prevState$events;
-
-            return {
-              events: (_prevState$events = prevState.events).concat.apply(_prevState$events, dataEvents)
-            };
+          _this.setState({
+            events: dataEvents
           });
+        });
+      };
+
+      _this.eventSelectedHandler = function (key) {
+        var selEvent = _this.state.events.find(function (event) {
+          return event.key === key;
+        });
+
+        if (selEvent) console.log(selEvent);
+
+        _reactNative.Alert.alert('Petshop', 'Deseja excluir este evento?', [{}, {
+          text: 'Cancelar',
+          onPress: function onPress() {
+            return console.log('Cancel Pressed');
+          },
+          style: 'cancel'
+        }, {
+          text: 'OK',
+          onPress: function onPress() {
+            return _this.deleteEvent(key);
+          }
+        }], {
+          cancelable: true
         });
       };
 
@@ -106203,6 +106228,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
         this.setState({
           addingEvent: null
         });
+        this.getEvents();
       }
     }, {
       key: "componentDidMount",
@@ -106210,13 +106236,28 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
         this.getEvents();
       }
     }, {
+      key: "deleteEvent",
+      value: function deleteEvent(key) {
+        console.log("Delete pressed");
+        console.log(key);
+        fetch(_Settings.serverUrl + 'petshop/' + key + '.json', {
+          method: "DELETE"
+        }).catch(function (err) {
+          return console.log(err);
+        }).then(function (res) {
+          return res.json();
+        });
+        this.getEvents();
+      }
+    }, {
       key: "renderEventList",
       value: function renderEventList() {
         return _react.default.createElement(_EventList.default, {
           events: this.state.events,
+          onItemSelected: this.eventSelectedHandler,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 80
+            lineNumber: 114
           }
         });
       }
@@ -106227,7 +106268,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           style: styles.container,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 88
+            lineNumber: 123
           }
         }, _react.default.createElement(_ModalAddEvent.default, {
           eventImage: "banho_bg",
@@ -106238,16 +106279,14 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           superClose: this.modalSuperClose.bind(this),
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 89
+            lineNumber: 124
           }
-        }), this.renderEventList(), _react.default.createElement(_reactNative.Button, {
-          title: "Open",
-          onPress: this.modalOpenHandler,
+        }), _react.default.createElement(_ModalTitle.default, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 98
+            lineNumber: 132
           }
-        }));
+        }), this.renderEventList());
       }
     }]);
     return PetShopScreen;
@@ -106257,15 +106296,14 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
 
   var styles = _reactNative.StyleSheet.create({
     container: {
-      paddingTop: 50,
-      backgroundColor: "white",
+      backgroundColor: "#eee",
       flex: 1
     }
   });
 
   var _default2 = PetShopScreen;
   exports.default = _default2;
-},640,[1,573,9,10,11,12,15,16,18,201,24,641,646],"src/screens/Care/PetShop.js");
+},640,[1,573,9,10,11,12,15,16,18,201,24,641,646,648,645],"src/screens/Care/PetShop.js");
 __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
   var _interopRequireDefault = _$$_REQUIRE(_dependencyMap[0], "@babel/runtime/helpers/interopRequireDefault");
 
@@ -106334,7 +106372,6 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
         fetch(_Settings.serverUrl + _this.props.eventAddress + ".json", {
           method: "POST",
           body: JSON.stringify({
-            key: Math.random().toString(),
             value: _this.state.value,
             chosenTime: _this.state.chosenTime,
             chosenDate: _this.state.chosenDate
@@ -106396,7 +106433,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
         return _react.default.createElement(_reactNative.View, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 63
+            lineNumber: 64
           }
         }, _react.default.createElement(_reactNative.Modal, {
           onRequestClose: this.props.onModalClosed,
@@ -106404,32 +106441,32 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           animationType: "slide",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 64
+            lineNumber: 65
           }
         }, _react.default.createElement(_reactNative.View, {
           style: styles.modalContainer,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 69
+            lineNumber: 70
           }
         }, _react.default.createElement(_reactNative.View, {
           style: styles.buttonContainer,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 70
+            lineNumber: 71
           }
         }, _react.default.createElement(_CloseButton.default, {
           onPress: this.props.onModalClosed,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 71
+            lineNumber: 72
           }
         }), _react.default.createElement(_reactNative.Button, {
           title: "Salvar",
           onPress: this.submitHandler,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 72
+            lineNumber: 73
           }
         })), _react.default.createElement(_EventDataForm.default, {
           formImage: this.props.eventImage,
@@ -106440,22 +106477,22 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           currentEventDate: this.updateDate.bind(this),
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 74
+            lineNumber: 75
           }
         }), _react.default.createElement(_reactNative.Text, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 82
+            lineNumber: 83
           }
         }, "value: ", this.state.value), _react.default.createElement(_reactNative.Text, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 83
+            lineNumber: 84
           }
         }, "Tempo: ", this.state.chosenTime), _react.default.createElement(_reactNative.Text, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 84
+            lineNumber: 85
           }
         }, "Data: ", this.state.chosenDate))));
       }
@@ -106958,6 +106995,9 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           eventDate: info.item.chosenDate,
           eventTime: info.item.chosenTime,
           eventValue: info.item.value,
+          onItemPressed: function onItemPressed() {
+            return props.onItemSelected(info.item.key);
+          },
           __source: {
             fileName: _jsxFileName,
             lineNumber: 13
@@ -106996,6 +107036,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
 
   var listItem = function listItem(props) {
     return _react.default.createElement(_reactNative.TouchableOpacity, {
+      onPress: props.onItemPressed,
       __source: {
         fileName: _jsxFileName,
         lineNumber: 5
@@ -107041,10 +107082,12 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
     listItem: {
       width: "100%",
       padding: 5,
-      backgroundColor: "#eee",
+      backgroundColor: "white",
       flexDirection: "row",
       justifyContent: "space-between",
-      alignItems: "center"
+      alignItems: "center",
+      borderWidth: 0.5,
+      borderColor: '#d6d7da'
     },
     textItem: {
       fontSize: 18,
@@ -107060,6 +107103,53 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
   var _default = listItem;
   exports.default = _default;
 },647,[1,18,24],"src/Components/ListItem.js");
+__d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
+  var _interopRequireDefault = _$$_REQUIRE(_dependencyMap[0], "@babel/runtime/helpers/interopRequireDefault");
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.default = void 0;
+
+  var _react = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[1], "react"));
+
+  var _reactNative = _$$_REQUIRE(_dependencyMap[2], "react-native");
+
+  var _jsxFileName = "/home/tassoeb/tcc/snapet/src/Components/UI/ModalTitle.js";
+
+  var modalTitle = function modalTitle(props) {
+    return _react.default.createElement(_reactNative.View, {
+      style: styles.TitleContainer,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 10
+      }
+    }, _react.default.createElement(_reactNative.Text, {
+      style: styles.titleText,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 11
+      }
+    }, "Titulo data data data"));
+  };
+
+  var styles = _reactNative.StyleSheet.create({
+    TitleContainer: {
+      flexDirection: "row",
+      alignItems: "center",
+      padding: 10,
+      backgroundColor: "#eee",
+      borderWidth: 0.5,
+      borderColor: '#d6d7da'
+    },
+    titleText: {
+      fontSize: 18
+    }
+  });
+
+  var _default = modalTitle;
+  exports.default = _default;
+},648,[1,18,24],"src/Components/UI/ModalTitle.js");
 __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
   var _interopRequireDefault = _$$_REQUIRE(_dependencyMap[0], "@babel/runtime/helpers/interopRequireDefault");
 
@@ -107162,7 +107252,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
 
   var _default2 = VeterinarioScreen;
   exports.default = _default2;
-},648,[1,573,10,11,12,15,16,18,201,24],"src/screens/Care/Veterinario.js");
+},649,[1,573,10,11,12,15,16,18,201,24],"src/screens/Care/Veterinario.js");
 __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
   var _interopRequireDefault = _$$_REQUIRE(_dependencyMap[0], "@babel/runtime/helpers/interopRequireDefault");
 
@@ -107265,7 +107355,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
 
   var _default2 = VacinasScreen;
   exports.default = _default2;
-},649,[1,573,10,11,12,15,16,18,201,24],"src/screens/Care/Vacinas.js");
+},650,[1,573,10,11,12,15,16,18,201,24],"src/screens/Care/Vacinas.js");
 __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
   var _interopRequireDefault = _$$_REQUIRE(_dependencyMap[0], "@babel/runtime/helpers/interopRequireDefault");
 
@@ -107368,7 +107458,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
 
   var _default2 = DadosPetScreen;
   exports.default = _default2;
-},650,[1,573,10,11,12,15,16,18,201,24],"src/screens/SideDrawer/DadosPet.js");
+},651,[1,573,10,11,12,15,16,18,201,24],"src/screens/SideDrawer/DadosPet.js");
 __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
   var _interopRequireDefault = _$$_REQUIRE(_dependencyMap[0], "@babel/runtime/helpers/interopRequireDefault");
 
@@ -107471,7 +107561,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
 
   var _default2 = DadosUserScreen;
   exports.default = _default2;
-},651,[1,573,10,11,12,15,16,18,201,24],"src/screens/SideDrawer/DadosUser.js");
+},652,[1,573,10,11,12,15,16,18,201,24],"src/screens/SideDrawer/DadosUser.js");
 __r(91);
 __r(0);
 //# sourceMappingURL=http://localhost:8081/index.android.map?platform=android

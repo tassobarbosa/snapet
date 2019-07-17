@@ -14,6 +14,7 @@ const eventList = props => {
               eventDate={info.item.chosenDate}
               eventTime={info.item.chosenTime}
               eventValue={info.item.value}
+              onItemPressed={() => props.onItemSelected(info.item.key)}
              />
           )}
         />

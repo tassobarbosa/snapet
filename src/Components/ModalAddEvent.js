@@ -33,7 +33,8 @@ export default class ModalAddEvent extends Component {
     fetch(serverUrl+this.props.eventAddress+".json",{
       method: "POST",
       body: JSON.stringify({
-        key: Math.random().toString(),
+        //Estou usando do do FIREBASE
+        //key: Math.random().toString(),
         value: this.state.value,
         chosenTime: this.state.chosenTime,
         chosenDate: this.state.chosenDate,
