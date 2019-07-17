@@ -10,6 +10,7 @@ import {
 
 import ModalAddEvent from "../../Components/ModalAddEvent";
 import EventList from "../../Components/EventList";
+import ModalTitle from "../../Components/UI/ModalTitle";
 
 class PetShopScreen extends Component {
   constructor(props){
@@ -26,6 +27,8 @@ class PetShopScreen extends Component {
     this.setState({
       addingEvent: null
     });
+    //Refresh List
+    this.getEvents();
   }
 
   modalClosedHandler = () => {
@@ -65,12 +68,7 @@ class PetShopScreen extends Component {
           ...parsedRes[key]
         })
       }
-
-      this.setState(prevState => {
-        return {
-          events: prevState.events.concat(...dataEvents)
-        };
-      });
+      this.setState({ events: dataEvents});
     })
   }
 
@@ -94,6 +92,7 @@ renderEventList(){
           onModalClosed={this.modalClosedHandler}
           superClose={this.modalSuperClose.bind(this)}
         />
+        <ModalTitle />
         {this.renderEventList()}
         <Button title="Open" onPress={this.modalOpenHandler} />
       </View>
