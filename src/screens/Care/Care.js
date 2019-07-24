@@ -15,6 +15,10 @@ class CareScreen extends Component {
   constructor(props){
     super(props);
     this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent);
+
+    this.state = {
+      showChart: false
+      };
   }
 
   onNavigatorEvent = event => {
@@ -87,13 +91,22 @@ class CareScreen extends Component {
     })
   }
 
+  handleToggleChart = () => {
+    this.setState(prevState => {
+      return {
+        showChart: !prevState.showChart
+      };
+    });
+  }
+
   render(){
     return(
       <View style={styles.container}>
         <CareButton name='Banho e Tosa' iconName='md-cut' onPress={this.goToPetshop}/>
         <CareButton name='Veterinário' iconName='md-medkit' onPress={this.goToVeterinario}/>
         <CareButton name='Cartão de vacinas' iconName='md-pulse' onPress={this.goToVacinas}/>
-        <CareChart />
+        <CareButton name='Banho Chart' iconName='md-cut' onPress={this.handleToggleChart}/>
+        <CareChart showChart={this.state.showChart}/>
       </View>
     );
   }

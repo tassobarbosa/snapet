@@ -13,12 +13,11 @@ export default class CareChart extends Component {
     this.state = {
         value: [],
         chosenDate: [],
-        option: 'false',
       };
   }
 
   renderChart(){
-    if(this.state.option){
+    if(!this.props.showChart){
       return(
         <Text>Selecione opcao para ver o grafico</Text>
       )
@@ -58,7 +57,7 @@ export default class CareChart extends Component {
             borderRadius: 16
           }}
         />
-      )  
+      )
     }
   }
 
