@@ -1,14 +1,35 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 
-import FoodHeader from './FoodHeader'
+import FoodHeader from './FoodHeader';
+import FoodEventItem from './FoodEventItem';
+import FoodList from './FoodList';
 import FoodButton from '../../Components/UI/FoodButton';
+
 
 class FoodScreen extends Component {
   constructor(props){
     super(props);
     this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent);
   }
+
+  state = {
+    meals: [
+      {
+        chosenName: 'fdgh',
+        chosenTime: 'fdgh',
+        chosenPortion: 'fdgh',
+        key: Math.random().toString()
+      },
+      {
+        chosenName: '4re',
+        chosenTime: '1223',
+        chosenPortion: '3ww',
+        key: Math.random().toString()
+      }
+    ]
+  };
+
 
   onNavigatorEvent = event => {
     if(event.type === "NavBarButtonPress"){
@@ -19,11 +40,24 @@ class FoodScreen extends Component {
       }
     }
   }
+
+  eventSelectedHandler = key => {
+    alert(key)
+  }
+
   render(){
     return(
       <View style={styles.container}>
         <FoodHeader />
-        <Text>Food Screen</Text>
+
+        <View style={styles.bodyContainer}>
+          <Text>Food Screen</Text>
+          <FoodList
+            meals={this.state.meals}
+            onItemSelected={this.eventSelectedHandler}
+          />
+        </View>
+
         <View style={styles.addButtonContainer}>
           <FoodButton />
         </View>
@@ -36,6 +70,9 @@ const styles = StyleSheet.create({
     container: {
       flex:1,
       backgroundColor: "#eee",
+    },
+    bodyContainer:{
+      padding: 10
     },
     addButtonContainer: {
       position: 'absolute',
