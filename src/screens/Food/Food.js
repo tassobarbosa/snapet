@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 
 import FoodHeader from './FoodHeader';
+import FoodModal from './FoodModal';
 import FoodEventItem from './FoodEventItem';
 import FoodList from './FoodList';
 import FoodButton from '../../Components/UI/FoodButton';
@@ -14,6 +15,7 @@ class FoodScreen extends Component {
   }
 
   state = {
+    modalVisible: null,
     meals: [
       {
         chosenName: 'fdgh',
@@ -30,6 +32,18 @@ class FoodScreen extends Component {
     ]
   };
 
+
+  modalClosedHandler = () => {
+    this.setState({
+      modalVisible: null
+    });
+  };
+
+  modalOpenHandler = () => {
+    this.setState({
+      modalVisible: true
+    });
+  };
 
   onNavigatorEvent = event => {
     if(event.type === "NavBarButtonPress"){
@@ -48,6 +62,10 @@ class FoodScreen extends Component {
   render(){
     return(
       <View style={styles.container}>
+        <FoodModal
+          openModal={this.state.modalVisible}
+          onModalClosed={this.modalClosedHandler}
+        />
         <FoodHeader />
 
         <View style={styles.bodyContainer}>
@@ -59,7 +77,7 @@ class FoodScreen extends Component {
         </View>
 
         <View style={styles.addButtonContainer}>
-          <FoodButton />
+          <FoodButton onPress={this.modalOpenHandler}/>
         </View>
       </View>
     );
