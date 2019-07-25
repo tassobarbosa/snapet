@@ -2,8 +2,20 @@ import React, {Component}  from "react";
 import { Modal, View, Image, Text, Button, StyleSheet } from "react-native";
 
 import CloseButton from '../../Components/UI/CloseButton';
+import FoodImage from '../../assets/Images/comida.jpeg';
+import FoodForm from './FoodForm';
 
 export default class FoodModal extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+        mealName: '',
+      };
+  }
+
+  updateName(mealName){
+    this.setState({mealName});
+  }
 
   render(){
     return (
@@ -17,6 +29,12 @@ export default class FoodModal extends Component {
             <View style={styles.buttonContainer}>
               <CloseButton onPress={this.props.onModalClosed} />
             </View>
+            <Image source={FoodImage} style={styles.foodImage}/>
+            <FoodForm
+              currentMealName = {this.updateName.bind(this)}
+            />
+
+            <Text>{this.state.mealName}</Text>
           </View>
         </Modal>
       )
@@ -33,5 +51,10 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     marginBottom: 10
     //alignItems: "center"
+  },
+  foodImage: {
+    width: "100%",
+    height: 200,
+    paddingBottom: 20,
   },
 });
