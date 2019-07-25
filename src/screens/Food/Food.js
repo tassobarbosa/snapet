@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 
-//import startMainTabs from '../MainTabs/startMainTabs';
+import FoodHeader from './FoodHeader'
+import FoodButton from '../../Components/UI/FoodButton';
 
 class FoodScreen extends Component {
   constructor(props){
@@ -20,11 +21,29 @@ class FoodScreen extends Component {
   }
   render(){
     return(
-      <View>
+      <View style={styles.container}>
+        <FoodHeader />
         <Text>Food Screen</Text>
+        <View style={styles.addButtonContainer}>
+          <FoodButton />
+        </View>
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+    container: {
+      flex:1,
+      backgroundColor: "#eee",
+    },
+    addButtonContainer: {
+      position: 'absolute',
+      bottom: 30,
+      width: "100%",
+      justifyContent: 'center',
+      alignItems: "center",
+    }
+});
 
 export default FoodScreen;
