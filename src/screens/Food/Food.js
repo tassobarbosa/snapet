@@ -7,6 +7,8 @@ import FoodEventItem from './FoodEventItem';
 import FoodList from './FoodList';
 import FoodButton from '../../Components/UI/FoodButton';
 
+import { serverUrl } from '../../Config/Settings.js'
+
 class FoodScreen extends Component {
   constructor(props){
     super(props);
@@ -15,26 +17,34 @@ class FoodScreen extends Component {
 
   state = {
     modalVisible: null,
-    meals: [
-      {
-        chosenName: 'fdgh',
-        chosenTime: 'fdgh',
-        chosenPortion: 'fdgh',
-        key: Math.random().toString()
-      },
-      {
-        chosenName: '4re',
-        chosenTime: '1223',
-        chosenPortion: '3ww',
-        key: Math.random().toString()
-      }
-    ]
+    meals: [],
   };
+
+  componentDidMount() {
+      this.getEvents();
+  }
+
+  getEvents = () => {
+    fetch(serverUrl+"meals.json")
+    .then(res => res.json())
+    .then(parsedRes => {
+      console.log(parsedRes)
+      const dataEvents = [];
+      for(let key in parsedRes){
+        dataEvents.push({
+          ...parsedRes[key],
+          key: key
+        })
+      }
+      this.setState({ meals: dataEvents});
+    })
+  }
 
   modalClosedHandler = () => {
     this.setState({
       modalVisible: null
     });
+    this.getEvents();
   };
 
   modalOpenHandler = () => {
@@ -73,10 +83,10 @@ class FoodScreen extends Component {
             onItemSelected={this.eventSelectedHandler}
           />
         </View>
-
         <View style={styles.addButtonContainer}>
           <FoodButton onPress={this.modalOpenHandler}/>
         </View>
+
       </View>
     );
   }
@@ -85,14 +95,16 @@ class FoodScreen extends Component {
 const styles = StyleSheet.create({
     container: {
       flex:1,
+      flexDirection: 'column',
       backgroundColor: "#eee",
     },
     bodyContainer:{
-      padding: 10
+      padding: 10,
+      height: 380,
     },
     addButtonContainer: {
       position: 'absolute',
-      bottom: 30,
+      bottom: 10,
       width: "100%",
       justifyContent: 'center',
       alignItems: "center",

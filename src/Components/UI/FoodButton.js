@@ -15,7 +15,7 @@ const foodButton = props => (
     <View style={styles.buttonContainer}>
       <Icon
         name='md-add'
-        size={50}
+        size={40}
         color="white"
         //style={styles.buttonIcon}
       />
@@ -26,8 +26,8 @@ const foodButton = props => (
 
 const styles = StyleSheet.create({
   buttonContainer: {
-      height: 70,
-      width: 70,  //The Width must be the same as the height
+      height: 50,
+      width: 50,  //The Width must be the same as the height
       borderRadius:150, //Then Make the Border Radius twice the size of width or Height
       backgroundColor:'#0bccde',
       justifyContent: 'center',

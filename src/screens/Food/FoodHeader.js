@@ -11,7 +11,7 @@ const foodHeader = (props) => (
 const styles = StyleSheet.create({
     headerContainer: {
         width: "100%",
-        height: 120,
+        height: 80,
         backgroundColor: "#0bccde",
     },
     headerText: {
