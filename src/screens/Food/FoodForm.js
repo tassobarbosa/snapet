@@ -6,7 +6,8 @@ import {
   Text,
   TextInput,
   StyleSheet,
-  TimePickerAndroid
+  TimePickerAndroid,
+  Slider
 } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 
@@ -15,6 +16,7 @@ export default class FoodForm extends Component {
   state = {
     mealName: "",
     mealTime: '00:00',
+    mealPortion: 1
   };
 
   onUpdateMealName(mealName){
@@ -24,6 +26,11 @@ export default class FoodForm extends Component {
 
   onUpdateTime(){
     this.props.currentMealTime(this.state.mealTime);
+  }
+
+  onUpdateMealPortion(mealPortion){
+    this.setState({mealPortion});
+    this.props.currentMealPortion(mealPortion);
   }
 
   setTimeAndroid = async () => {
@@ -65,7 +72,18 @@ export default class FoodForm extends Component {
             </View>
           </TouchableOpacity>
 
-        <Text>Procao</Text>
+
+          <Slider
+            style={{width: 200, height: 40}}
+            minimumValue={1}
+            maximumValue={5}
+            step={1}
+            minimumTrackTintColor="#456456"
+            maximumTrackTintColor="#000000"
+            onValueChange={value => this.onUpdateMealPortion(value)}
+          />
+          <Text>{this.state.mealPortion}</Text>
+
       </View>
     )
   }

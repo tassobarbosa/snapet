@@ -11,6 +11,7 @@ export default class FoodModal extends Component {
     this.state = {
         mealName: '',
         mealTime: '',
+        mealPortion: 0
       };
   }
 
@@ -20,6 +21,10 @@ export default class FoodModal extends Component {
 
   updateTime(mealTime){
     this.setState({mealTime});
+  }
+
+  updatePortion(mealPortion){
+    this.setState({mealPortion});
   }
 
   render(){
@@ -38,10 +43,12 @@ export default class FoodModal extends Component {
             <FoodForm
               currentMealName = {this.updateName.bind(this)}
               currentMealTime={this.updateTime.bind(this)}
+              currentMealPortion={this.updatePortion.bind(this)}
             />
 
             <Text>{this.state.mealName}</Text>
             <Text>{this.state.mealTime}</Text>
+            <Text>{this.state.mealPortion}</Text>
           </View>
         </Modal>
       )
