@@ -7,7 +7,6 @@ import FoodEventItem from './FoodEventItem';
 import FoodList from './FoodList';
 import FoodButton from '../../Components/UI/FoodButton';
 
-
 class FoodScreen extends Component {
   constructor(props){
     super(props);
@@ -31,7 +30,6 @@ class FoodScreen extends Component {
       }
     ]
   };
-
 
   modalClosedHandler = () => {
     this.setState({

@@ -5,6 +5,8 @@ import CloseButton from '../../Components/UI/CloseButton';
 import FoodImage from '../../assets/Images/comida.jpeg';
 import FoodForm from './FoodForm';
 
+import { serverUrl } from '../../Config/Settings.js'
+
 export default class FoodModal extends Component {
   constructor(props) {
     super(props);
@@ -27,6 +29,38 @@ export default class FoodModal extends Component {
     this.setState({mealPortion});
   }
 
+  submitHandler = () => {
+    console.log("hey");
+
+    fetch(serverUrl+"meals.json",{
+      method: "POST",
+      body: JSON.stringify({
+        //Estou usando do do FIREBASE
+        //key: Math.random().toString(),
+        chosenName: this.state.mealName,
+        chosenTime: this.state.mealTime,
+        chosenPortion: this.state.mealPortion,
+      })
+    })
+    .catch(err => console.log(err))
+    .then(res => res.json())
+    .then(parsedRes => {
+      console.log(parsedRes);
+    });
+
+
+    this.props.onModalClosed();
+    this.clearState();
+  }
+
+  clearState(){
+    this.setState({
+      mealName: '',
+      mealTime: '',
+      mealTime: 0
+    });
+  }
+
   render(){
     return (
 
@@ -38,6 +72,7 @@ export default class FoodModal extends Component {
           <View style={styles.modalContainer}>
             <View style={styles.buttonContainer}>
               <CloseButton onPress={this.props.onModalClosed} />
+              <Button title="Salvar" onPress={this.submitHandler}/>
             </View>
             <Image source={FoodImage} style={styles.foodImage}/>
             <FoodForm
