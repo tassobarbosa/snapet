@@ -9,6 +9,7 @@ import {
 } from "react-native";
 
 import PetModal from './PetModal';
+import { serverUrl } from '../../Config/Settings.js'
 
 class DadosPetScreen extends Component {
   constructor(props){
@@ -18,6 +19,9 @@ class DadosPetScreen extends Component {
 
   state = {
     modalVisible: null,
+    petName: '',
+    petBreed: '',
+    petBirth: ''
   };
 
   onNavigatorEvent = event => {
@@ -28,6 +32,31 @@ class DadosPetScreen extends Component {
         })
       }
     }
+  }
+
+  componentDidMount() {
+      this.getPetData();
+  }
+
+  getPetData = () => {
+    fetch(serverUrl+"petdata.json")
+    .then(res => res.json())
+    .then(parsedRes => {
+      console.log(parsedRes)
+      const dataEvents = [];
+      for(let key in parsedRes){
+        dataEvents.push({
+          ...parsedRes[key],
+          key: key
+        })
+      }
+       this.setState({
+         petName: dataEvents[0].chosenPetName,
+        petBreed: dataEvents[0].chosenPetBreed,
+         petBirth: dataEvents[0].chosenPetBirth,
+     });
+
+    })
   }
 
   modalClosedHandler = () => {
@@ -50,9 +79,9 @@ class DadosPetScreen extends Component {
           onModalClosed={this.modalClosedHandler}
         />
 
-        <Text> Nome</Text>
-        <Text> Raça</Text>
-        <Text> Idade</Text>
+        <Text> Nome: {this.state.petName}</Text>
+        <Text> Raça: {this.state.petBreed}</Text>
+        <Text> Nascimento: {this.state.petBirth}</Text>
         <Text> Foto</Text>
         <View>
           <Button title="Alterar foto"/>

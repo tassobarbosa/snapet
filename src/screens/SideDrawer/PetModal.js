@@ -28,6 +28,38 @@ export default class PetModal extends Component {
     this.setState({petBirth});
   }
 
+  submitHandler = () => {
+    console.log("hey");
+
+    fetch(serverUrl+"petdata.json",{
+      method: "POST",
+      body: JSON.stringify({
+        //Estou usando do do FIREBASE
+        //key: Math.random().toString(),
+        chosenPetName: this.state.petName,
+        chosenPetBreed: this.state.petBreed,
+        chosenPetBirth: this.state.petBirth,
+      })
+    })
+    .catch(err => console.log(err))
+    .then(res => res.json())
+    .then(parsedRes => {
+      console.log(parsedRes);
+    });
+
+
+    this.props.onModalClosed();
+    this.clearState();
+  }
+
+  clearState(){
+    this.setState({
+      petName: '',
+      petBreed: '',
+      petBirth: ''
+    });
+  }
+
   render(){
     return (
       <Modal
@@ -38,6 +70,7 @@ export default class PetModal extends Component {
         <View style={styles.modalContainer}>
           <View style={styles.buttonContainer}>
             <CloseButton onPress={this.props.onModalClosed} />
+            <Button title="Salvar" onPress={this.submitHandler}/>
           </View>
           <PetForm
             currentPetName = {this.updateName.bind(this)}
