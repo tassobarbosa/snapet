@@ -29,27 +29,26 @@ export default class PetModal extends Component {
   }
 
   submitHandler = () => {
-    console.log("hey");
+    this.deletePetData(this.props.internKey)
 
-    fetch(serverUrl+"petdata.json",{
-      method: "POST",
-      body: JSON.stringify({
-        //Estou usando do do FIREBASE
-        //key: Math.random().toString(),
-        chosenPetName: this.state.petName,
-        chosenPetBreed: this.state.petBreed,
-        chosenPetBirth: this.state.petBirth,
+      fetch(serverUrl+"petdata.json",{
+        method: "POST",
+        body: JSON.stringify({
+          //Estou usando do do FIREBASE
+          //key: Math.random().toString(),
+          chosenPetName: this.state.petName,
+          chosenPetBreed: this.state.petBreed,
+          chosenPetBirth: this.state.petBirth,
+        })
       })
-    })
-    .catch(err => console.log(err))
-    .then(res => res.json())
-    .then(parsedRes => {
-      console.log(parsedRes);
-    });
+      .catch(err => console.log(err))
+      .then(res => res.json())
+      .then(parsedRes => {
+        console.log(parsedRes);
+      });
 
-
-    this.props.onModalClosed();
-    this.clearState();
+      this.props.onModalClosed();
+      this.clearState();
   }
 
   clearState(){
@@ -58,6 +57,17 @@ export default class PetModal extends Component {
       petBreed: '',
       petBirth: ''
     });
+  }
+
+  deletePetData(key){
+    console.log("Delete pressed");
+    console.log(key);
+
+      fetch(serverUrl + 'petdata/' + key + '.json', {
+        method: "DELETE"
+      })
+      .catch(err => console.log(err))
+      .then(res => res.json())
   }
 
   render(){

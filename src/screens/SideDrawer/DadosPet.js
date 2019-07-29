@@ -21,7 +21,8 @@ class DadosPetScreen extends Component {
     modalVisible: null,
     petName: '',
     petBreed: '',
-    petBirth: ''
+    petBirth: '',
+    key: ''
   };
 
   onNavigatorEvent = event => {
@@ -54,6 +55,7 @@ class DadosPetScreen extends Component {
          petName: dataEvents[0].chosenPetName,
         petBreed: dataEvents[0].chosenPetBreed,
          petBirth: dataEvents[0].chosenPetBirth,
+         key: dataEvents[0].key
      });
 
     })
@@ -63,6 +65,8 @@ class DadosPetScreen extends Component {
     this.setState({
       modalVisible: null
     });
+    //Refresh List
+    this.getPetData();
   };
 
   modalOpenHandler = () => {
@@ -77,11 +81,13 @@ class DadosPetScreen extends Component {
         <PetModal
           openModal={this.state.modalVisible}
           onModalClosed={this.modalClosedHandler}
+          internKey={this.state.key}
         />
 
         <Text> Nome: {this.state.petName}</Text>
         <Text> Raça: {this.state.petBreed}</Text>
         <Text> Nascimento: {this.state.petBirth}</Text>
+        <Text> chave: {this.state.key}</Text>
         <Text> Foto</Text>
         <View>
           <Button title="Alterar foto"/>
