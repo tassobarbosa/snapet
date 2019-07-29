@@ -10,11 +10,16 @@ export default class FoodModal extends Component {
     super(props);
     this.state = {
         mealName: '',
+        mealTime: '',
       };
   }
 
   updateName(mealName){
     this.setState({mealName});
+  }
+
+  updateTime(mealTime){
+    this.setState({mealTime});
   }
 
   render(){
@@ -32,9 +37,11 @@ export default class FoodModal extends Component {
             <Image source={FoodImage} style={styles.foodImage}/>
             <FoodForm
               currentMealName = {this.updateName.bind(this)}
+              currentMealTime={this.updateTime.bind(this)}
             />
 
             <Text>{this.state.mealName}</Text>
+            <Text>{this.state.mealTime}</Text>
           </View>
         </Modal>
       )
