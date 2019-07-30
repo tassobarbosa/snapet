@@ -1,8 +1,17 @@
 import React, {Component} from 'react';
-import {View, Text, Button} from 'react-native';
+import {
+  KeyboardAvoidingView,
+  View,
+  StyleSheet,
+  Text,
+  Button,
+  Image,
+  ImageBackground
+} from 'react-native';
 
 import startMainTabs from '../MainTabs/startMainTabs';
-
+import backgroundImage from "../../assets/Images/login-screen.jpeg";
+import DefaultInput from "../../Components/UI/DefaultInput";
 class AuthScreen extends Component {
 
 loginHandler = () => {
@@ -10,13 +19,37 @@ loginHandler = () => {
 }
 
   render(){
+    const backgnd = "https://thehappypuppysite.com/wp-content/uploads/2019/05/cute-dog-quotes-HP-long.jpg";
     return(
-      <View>
-        <Text>AuthScreen</Text>
-        <Button title="login" onPress={this.loginHandler} />
-      </View>
+      <ImageBackground source={{uri: backgnd}} style={styles.backgroundImage}>
+          <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
+            <View style={styles.inputContainer}>
+              <DefaultInput />
+              <DefaultInput />
+              <Button title="login" onPress={this.loginHandler} />
+            </View>
+          </KeyboardAvoidingView>
+      </ImageBackground>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: "#eee",
+  },
+  backgroundImage: {
+    flex: 1,
+  },
+  inputContainer: {
+    width: "80%"
+  },  
+}
+)
+
 
 export default AuthScreen;

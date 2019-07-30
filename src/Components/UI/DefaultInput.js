@@ -1,0 +1,49 @@
+import React, { Component } from "react";
+import { View, TextInput, Button, StyleSheet } from "react-native";
+
+export default class DefaultInput extends Component {
+  state = {
+    placeName: ""
+  };
+
+  placeNameChangedHandler = val => {
+    this.setState({
+      placeName: val
+    });
+  };
+
+  placeSubmitHandler = () => {
+    if (this.state.placeName.trim() === "") {
+      return;
+    }
+
+    //this.props.onPlaceAdded(this.state.placeName);
+  };
+
+  render() {
+    return (
+
+        <TextInput
+          placeholder="An awesome place"
+          value={this.state.placeName}
+          onChangeText={this.placeNameChangedHandler}
+          style={styles.placeInput}
+        />
+
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+  placeInput: {
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: "#eee",
+    padding: 5,
+    marginTop: 8,
+    marginBottom: 8
+  },
+});
