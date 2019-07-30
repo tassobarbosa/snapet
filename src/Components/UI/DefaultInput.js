@@ -17,14 +17,15 @@ export default class DefaultInput extends Component {
       return;
     }
 
-    //this.props.onPlaceAdded(this.state.placeName);
+    this.props.onInfoTyped(this.state.placeName);
   };
 
   render() {
     return (
 
         <TextInput
-          placeholder="An awesome place"
+          placeholder={this.props.placeholder}
+          underlineColorAndroid="transparent"
           value={this.state.placeName}
           onChangeText={this.placeNameChangedHandler}
           style={styles.placeInput}
