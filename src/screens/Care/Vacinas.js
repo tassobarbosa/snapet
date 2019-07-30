@@ -121,8 +121,8 @@ renderEventList(){
     return(
         <View style={styles.container}>
           <ModalAddEvent
-            eventImage='banho_bg'
-            eventName='eh so uma picadinha!'
+            eventImage='vacina_bg'
+            eventName='é so uma picadinha!'
             eventAddress='/vacinas'
             addingEvent={this.state.addingEvent}
             onModalClosed={this.modalClosedHandler}

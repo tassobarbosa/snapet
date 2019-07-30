@@ -125,8 +125,8 @@ export default class EventDataForm extends Component {
   mapKeyToImagePath(key) {
     return {
       banho_bg: require("../assets/Images/banho-tosa.jpeg"),
-      //doses_bg: require('../Images/Products/doses_bg.png'),
-      //shots_bg: require('../Images/Products/shots_bg.png'),
+      vacina_bg: require('../assets/Images/vacina.jpg'),
+      veterinario_bg: require('../assets/Images/veterinario.jpg'),
     }[key];
   }
 

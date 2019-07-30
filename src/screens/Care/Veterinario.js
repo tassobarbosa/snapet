@@ -121,7 +121,7 @@ renderEventList(){
     return(
         <View style={styles.container}>
           <ModalAddEvent
-            eventImage='banho_bg'
+            eventImage='veterinario_bg'
             eventName='Saude em primeiro lugar ;)'
             eventAddress='/veterinario'
             addingEvent={this.state.addingEvent}
