@@ -79,10 +79,7 @@ export default class ModalAddEvent extends Component {
               currentEventValue={this.updateValue.bind(this)}
               currentEventTime={this.updateTime.bind(this)}
               currentEventDate={this.updateDate.bind(this)}
-            />
-            <Text>value: {this.state.value}</Text>
-            <Text>Tempo: {this.state.chosenTime}</Text>
-            <Text>Data: {this.state.chosenDate}</Text>
+            />            
           </View>
         </Modal>
       </View>

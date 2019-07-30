@@ -8,7 +8,9 @@ import {
   View,
   TouchableOpacity,
   DatePickerAndroid,
-  TimePickerAndroid
+  TimePickerAndroid,
+  ScrollView,
+  KeyboardAvoidingView
 } from 'react-native';
 
 import Icon from "react-native-vector-icons/Ionicons";
@@ -85,39 +87,38 @@ export default class EventDataForm extends Component {
     const source = this.mapKeyToImagePath(this.props.formImage);
 
     return(
-      <View style={styles.formContainer}>
+      <ScrollView style={styles.formContainer}>
+        <KeyboardAvoidingView behavior="padding" enabled>
+          <Image source={source} style={styles.eventImage} />
 
-        <Image source={source} style={styles.eventImage} />
+          <Text style={styles.eventName}>{this.props.formName}</Text>
 
-        <Text style={styles.eventName}>{this.props.formName}</Text>
+            <TouchableOpacity onPress={() => this.setDateAndroid()}>
+              <View style={styles.pickerContainer}>
+                <Icon name="ios-calendar" size={25} style={styles.iconPicker}/>
+                <Text style={{ fontSize: 16 }}>
+                  {this.state.androidDate}
+                </Text>
+              </View>
+            </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => this.setDateAndroid()}>
-            <View style={styles.pickerContainer}>
-              <Icon name="ios-calendar" size={25} style={styles.iconPicker}/>
-              <Text style={{ fontSize: 16 }}>
-                {this.state.androidDate}
-              </Text>
-            </View>
-          </TouchableOpacity>
+            <TouchableOpacity onPress={() => this.setTimeAndroid()}>
+              <View style={styles.pickerContainer}>
+                <Icon name="ios-time" size={25} style={styles.iconPicker}/>
+                <Text style={{fontSize: 16 }}>
+                  {this.state.chosenAndroidTime}
+                </Text>
+              </View>
+            </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => this.setTimeAndroid()}>
-            <View style={styles.pickerContainer}>
-              <Icon name="ios-time" size={25} style={styles.iconPicker}/>
-              <Text style={{fontSize: 16 }}>
-                {this.state.chosenAndroidTime}
-              </Text>
-            </View>
-          </TouchableOpacity>
-
-          <TextInput
-              style={styles.inputText}
-              placeholder={this.props.placeholder}
-              onChangeText={value => this.onUpdateValue(value)}
-              value={this.state.value}
-            />
-
-
-      </View>
+            <TextInput
+                style={[styles.pickerContainer, styles.inputText]}
+                placeholder={this.props.placeholder}
+                onChangeText={value => this.onUpdateValue(value)}
+                value={this.state.value}
+              />
+        </KeyboardAvoidingView>
+      </ScrollView>
     )
   }
 
@@ -134,6 +135,7 @@ export default class EventDataForm extends Component {
 const styles = StyleSheet.create({
   formContainer: {
     paddingTop: 10,
+    marginBottom: 50,
   },
   eventImage: {
     width: "100%",
@@ -159,6 +161,7 @@ const styles = StyleSheet.create({
   },
   inputText: {
     fontSize: 18,
+    marginBottom: 5
   },
   rightIcon: {
     position: 'absolute',

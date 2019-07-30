@@ -131,6 +131,7 @@ renderEventList(){
         />
         <ModalTitle />
         {this.renderEventList()}
+        <Button title="Alterar" onPress={this.modalOpenHandler}/>
       </View>
     );
   }
