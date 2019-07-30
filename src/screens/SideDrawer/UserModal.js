@@ -10,10 +10,64 @@ export default class UserModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      petName: '',
-      petBreed: '',
-      petBirth: ''
+      userName: '',
+      userEmail: '',
+      birthDate: ''
       };
+  }
+
+  updateName(userName){
+    this.setState({userName});
+  }
+
+  updateEmail(userEmail){
+    this.setState({userEmail});
+  }
+
+  updateBirth(birthDate){
+    this.setState({birthDate});
+  }
+
+  submitHandler = () => {
+    this.deleteUserData(this.props.internKey)
+
+      fetch(serverUrl+"userdata.json",{
+        method: "POST",
+        body: JSON.stringify({
+          //Estou usando do do FIREBASE
+          //key: Math.random().toString(),
+          userName: this.state.userName,
+          userEmail: this.state.userEmail,
+          birthDate: this.state.birthDate,
+        })
+      })
+      .catch(err => console.log(err))
+      .then(res => res.json())
+      .then(parsedRes => {
+        console.log(parsedRes);
+      });
+
+      this.props.onModalClosed();
+      this.clearState();
+  }
+
+  clearState(){
+    this.setState({
+      userName: '',
+      userEmail: '',
+      birthDate: ''
+    });
+  }
+
+  deleteUserData(key){
+    console.log("Delete pressed");
+    console.log(key);
+
+      fetch(serverUrl + 'userdata/' + key + '.json', {
+        method: "DELETE"
+      })
+      .catch(err => console.log(err))
+      .then(res => res.json())
   }
 
   render(){
@@ -26,8 +80,13 @@ export default class UserModal extends Component {
         <View style={styles.modalContainer}>
           <View style={styles.buttonContainer}>
             <CloseButton onPress={this.props.onModalClosed} />
+            <Button title="Salvar" onPress={this.submitHandler}/>
           </View>
-          <UserForm />
+          <UserForm
+            currentUserName = {this.updateName.bind(this)}
+            currentUserEmail = {this.updateEmail.bind(this)}
+            currentBirthDate = {this.updateBirth.bind(this)}
+          />
         </View>
       </Modal>
     )

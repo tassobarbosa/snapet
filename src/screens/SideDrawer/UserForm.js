@@ -38,7 +38,7 @@ export default class UserForm extends Component {
       });
       if (action !== DatePickerAndroid.dismissedAction) {
         this.setState({ androidDate: `${day}/${month + 1}/${year}` });
-        //this.onUpdateDate();
+        this.onUpdateBirthDate();
       }
     } catch ({ code, message }) {
       console.warn('Cannot open date picker', message);
@@ -46,19 +46,32 @@ export default class UserForm extends Component {
   };
 
 
+  onUpdateUserName(userName){
+    this.setState({userName});
+    this.props.currentUserName(userName);
+  }
+  onUpdateUserEmail(userEmail){
+    this.setState({userEmail});
+    this.props.currentUserEmail(userEmail);
+  }
+
+  onUpdateBirthDate(){
+    this.props.currentBirthDate(this.state.androidDate);
+  }
+
   render(){
     return(
       <View style={styles.container}>
         <TextInput
             style={styles.inputText}
             placeholder='Nome do Usuário'
-            //onChangeText={value => this.onUpdatePetName(value)}
+            onChangeText={value => this.onUpdateUserName(value)}
             value={this.state.userName}
           />
           <TextInput
               style={styles.inputText}
               placeholder='Email'
-              //onChangeText={value => this.onUpdatePetBreed(value)}
+              onChangeText={value => this.onUpdateUserEmail(value)}
               value={this.state.userEmail}
             />
 

@@ -9,6 +9,7 @@ import {
 } from "react-native";
 
 import UserModal from './UserModal';
+import { serverUrl } from '../../Config/Settings.js'
 
 class DadosUserScreen extends Component {
   constructor(props){
@@ -18,9 +19,9 @@ class DadosUserScreen extends Component {
 
   state = {
     modalVisible: null,
-    petName: '',
-    petBreed: '',
-    petBirth: '',
+    userName: '',
+    userEmail: '',
+    birthDate: '',
     key: ''
   };
 
@@ -34,10 +35,38 @@ class DadosUserScreen extends Component {
     }
   }
 
+  componentDidMount() {
+      this.getUserData();
+  }
+
+  getUserData = () => {
+    fetch(serverUrl+"userdata.json")
+    .then(res => res.json())
+    .then(parsedRes => {
+      console.log(parsedRes)
+      const dataEvents = [];
+      for(let key in parsedRes){
+        dataEvents.push({
+          ...parsedRes[key],
+          key: key
+        })
+      }
+       this.setState({
+         userName: dataEvents[0].userName,
+         userEmail: dataEvents[0].userEmail,
+         birthDate: dataEvents[0].birthDate,
+         key: dataEvents[0].key
+     });
+
+    })
+  }
+
   modalClosedHandler = () => {
     this.setState({
       modalVisible: null
     });
+    //Refresh List
+    this.getUserData();
   };
 
   modalOpenHandler = () => {
@@ -53,11 +82,12 @@ class DadosUserScreen extends Component {
         <UserModal
           openModal={this.state.modalVisible}
           onModalClosed={this.modalClosedHandler}
+          internKey={this.state.key}
         />
 
-        <Text> Nome: {this.state.petName}</Text>
-        <Text> Data de nascimento: {this.state.petBirth}</Text>
-        <Text> Email: {this.state.petBreed}</Text>
+        <Text> Nome: {this.state.userName}</Text>
+        <Text> Data de nascimento: {this.state.userEmail}</Text>
+        <Text> Email: {this.state.birthDate}</Text>
         <Text> chave: {this.state.key}</Text>
         <Text> Foto</Text>
         <View>
