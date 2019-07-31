@@ -8,6 +8,7 @@ import {
 } from "react-native";
 
 import Icon from "react-native-vector-icons/Ionicons";
+import CommonStyles from '../../Stylesheets/Common';
 
 const defaultButton = props => (
   <TouchableOpacity onPress={props.onPress} style={styles.buttonContainer}>
@@ -22,7 +23,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
       height: 50,
       width: "100%",  //The Width must be the same as the height
-      backgroundColor:'#0bccde',
+      backgroundColor: CommonStyles.screenBackgroundColor,
       justifyContent: 'center',
       alignItems: "center",
   },
