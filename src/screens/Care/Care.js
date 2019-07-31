@@ -10,6 +10,7 @@ import {
 import CareChart from '../../Components/CareChart';
 import CareButton from '../../Components/UI/CareButton';
 import Icon from "react-native-vector-icons/Ionicons";
+import CommonStyles from '../../Stylesheets/Common';
 
 class CareScreen extends Component {
   constructor(props){
@@ -115,7 +116,7 @@ class CareScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     paddingTop: 50,
-    backgroundColor: "white",
+    backgroundColor: CommonStyles.screenBackgroundColor,
     flex: 1
   }
 });

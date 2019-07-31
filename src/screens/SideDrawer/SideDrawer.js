@@ -9,6 +9,7 @@ import {
 } from "react-native";
 
 import DrawerButton from '../../Components/UI/DrawerButton';
+import CommonStyles from '../../Stylesheets/Common';
 import Icon from "react-native-vector-icons/Ionicons";
 import App from "../../../App";
 
@@ -54,7 +55,7 @@ class SideDrawer extends Component {
 const styles = StyleSheet.create({
   container: {
     paddingTop: 50,
-    backgroundColor: "white",
+    backgroundColor: CommonStyles.mainColor,
     flex: 1,
     width: Dimensions.get("window").width * 0.7
   },
