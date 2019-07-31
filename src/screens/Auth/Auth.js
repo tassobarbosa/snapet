@@ -35,8 +35,7 @@ loginHandler = () => {
                 <DefaultInput
                   placeholder="senha"
                 />
-                <Button title="login" onPress={this.loginHandler} />
-                <DefaultButton label='ola'/>
+                <DefaultButton label='LOGIN' onPress={this.loginHandler}/>
               </View>
           </KeyboardAvoidingView>
         </TouchableWithoutFeedback>

@@ -9,6 +9,7 @@ import {
 } from "react-native";
 
 import Icon from "react-native-vector-icons/Ionicons";
+import CommonStyles from '../../Stylesheets/Common';
 
 const foodButton = props => (
   <TouchableOpacity onPress={props.onPress} style={styles.buttonContainer}>
@@ -29,7 +30,7 @@ const styles = StyleSheet.create({
       height: 50,
       width: 50,  //The Width must be the same as the height
       borderRadius:150, //Then Make the Border Radius twice the size of width or Height
-      backgroundColor:'#0bccde',
+        backgroundColor: CommonStyles.secondColor,
       justifyContent: 'center',
       alignItems: "center",
   },

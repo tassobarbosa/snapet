@@ -23,7 +23,9 @@ const styles = StyleSheet.create({
   buttonContainer: {
       height: 50,
       width: "100%",  //The Width must be the same as the height
-      backgroundColor: CommonStyles.screenBackgroundColor,
+      backgroundColor: CommonStyles.mainColor,
+      borderRadius: 5,
+      elevation: 2, // Android
       justifyContent: 'center',
       alignItems: "center",
   },
@@ -31,9 +33,9 @@ const styles = StyleSheet.create({
     marginRight: 20
   },
   text: {
-    fontFamily: 'sans-serif',
-    color: '#444',
-    fontSize: 14
+    fontFamily: CommonStyles.fontTexts,
+    color: CommonStyles.textColor,
+    fontSize: CommonStyles.fontSize
   }
 });
 

@@ -6,8 +6,10 @@ import FoodModal from './FoodModal';
 import FoodEventItem from './FoodEventItem';
 import FoodList from './FoodList';
 import FoodButton from '../../Components/UI/FoodButton';
+import CommonStyles from '../../Stylesheets/Common';
 
 import { serverUrl } from '../../Config/Settings.js'
+
 
 class FoodScreen extends Component {
   constructor(props){
@@ -77,7 +79,6 @@ class FoodScreen extends Component {
         <FoodHeader />
 
         <View style={styles.bodyContainer}>
-          <Text>Food Screen</Text>
           <FoodList
             meals={this.state.meals}
             onItemSelected={this.eventSelectedHandler}
@@ -96,7 +97,8 @@ const styles = StyleSheet.create({
     container: {
       flex:1,
       flexDirection: 'column',
-      backgroundColor: "#eee",
+      //backgroundColor: "#eee",
+      backgroundColor: CommonStyles.screenBackgroundColor,
     },
     bodyContainer:{
       padding: 10,

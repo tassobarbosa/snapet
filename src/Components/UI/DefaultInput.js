@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { View, TextInput, Button, StyleSheet } from "react-native";
 
+import CommonStyles from '../../Stylesheets/Common';
+
 export default class DefaultInput extends Component {
   state = {
     placeName: ""
@@ -22,7 +24,6 @@ export default class DefaultInput extends Component {
 
   render() {
     return (
-
         <TextInput
           placeholder={this.props.placeholder}
           underlineColorAndroid="transparent"
@@ -45,6 +46,8 @@ const styles = StyleSheet.create({
     borderColor: "#eee",
     padding: 5,
     marginTop: 8,
-    marginBottom: 8
+    marginBottom: 8,
+    fontFamily: CommonStyles.fontTexts,
+    fontSize: 20
   },
 });
