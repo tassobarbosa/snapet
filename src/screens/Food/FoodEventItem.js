@@ -40,11 +40,13 @@ const styles = StyleSheet.create({
     textItem: {
       fontSize: 26,
       fontWeight: 'bold',
+      textAlign: 'center',
       color: CommonStyles.mainColor,
     },
     textTitle: {
       fontSize: 18,
       fontWeight: 'bold',
+      textAlign: 'center',
     }
 });
 

@@ -1,15 +1,20 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 
+import CommonStyles from '../Stylesheets/Common';
+
 const listItem = (props) => (
   <TouchableOpacity onPress={props.onItemPressed}>
     <View style={styles.listItem}>
-      <View>
-        <Text style={styles.textItem}>{props.eventDate}</Text>
-        <Text style={styles.textItem}>{props.eventTime}</Text>
+      <View style={styles.itemField}>
+        <Text style={styles.textTitle}>{props.eventDate}</Text>
       </View>
-      <View>
-        <Text style={styles.textItem}>Valor: {props.eventValue}</Text>
+      <View style={styles.itemField}>
+        <Text style={styles.textTitle}>{props.eventTime}</Text>
+      </View>
+      <View style={styles.itemField}>
+        <Text style={styles.textTitle}>Valor: </Text>
+        <Text style={styles.textItem}>{props.eventValue},00</Text>
       </View>
     </View>
   </TouchableOpacity>
@@ -18,22 +23,29 @@ const listItem = (props) => (
 const styles = StyleSheet.create({
     listItem: {
         width: "100%",
-        padding: 5,
+        height: 60,
         backgroundColor: "white",
         flexDirection: "row",
-        justifyContent: "space-between",
         alignItems: "center",
         borderWidth: 0.5,
         borderColor: '#d6d7da',
     },
-    textItem: {
-      fontSize: 18,
-      fontWeight: 'bold'
+    itemField: {
+      width: "33%",
+      flexDirection: "row",
+      justifyContent: "center",
     },
-    placeImage: {
-      marginRight: 8,
-      height: 30,
-      width: 30
+    textItem: {
+      fontSize: 22,
+      fontWeight: 'bold',
+      textAlign: 'center',
+      textAlignVertical: 'center',
+      color: CommonStyles.mainColor,
+    },
+    textTitle: {
+      fontSize: 18,
+      textAlignVertical: 'center',
+      paddingRight: 10,
     }
 });
 

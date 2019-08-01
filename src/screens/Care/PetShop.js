@@ -129,9 +129,8 @@ renderEventList(){
           onModalClosed={this.modalClosedHandler}
           superClose={this.modalSuperClose.bind(this)}
         />
-        <ModalTitle />
         {this.renderEventList()}
-        <Button title="Alterar" onPress={this.modalOpenHandler}/>
+        {/* <Button title="Alterar" onPress={this.modalOpenHandler}/> */}
       </View>
     );
   }

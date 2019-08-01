@@ -8,7 +8,7 @@ import {
 
 const modalTitle = props => (
     <View style={styles.TitleContainer}>
-      <Text style={styles.titleText}>Titulo data data data</Text>
+      <Text style={styles.titleText}>{props.label}</Text>
     </View>
 )
 

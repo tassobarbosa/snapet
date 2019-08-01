@@ -128,7 +128,6 @@ renderEventList(){
             onModalClosed={this.modalClosedHandler}
             superClose={this.modalSuperClose.bind(this)}
           />
-          <ModalTitle />
           {this.renderEventList()}
         </View>
     );
