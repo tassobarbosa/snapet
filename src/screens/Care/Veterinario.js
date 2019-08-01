@@ -34,14 +34,6 @@ class VeterinarioScreen extends Component {
     }
   }
 
-  modalSuperClose(e){
-    this.setState({
-      addingEvent: null
-    });
-    //Refresh List
-    this.getEvents();
-  }
-
   modalClosedHandler = () => {
     this.setState({
       addingEvent: null
@@ -55,7 +47,11 @@ class VeterinarioScreen extends Component {
   };
 
   componentDidMount() {
-      this.getEvents();
+    this.getEvents();
+
+      checkBalanceTimer = setInterval(() => {
+        this.getEvents();
+      }, 20000)
   }
 
   getEvents = () => {
@@ -126,7 +122,6 @@ renderEventList(){
             eventAddress='/veterinario'
             addingEvent={this.state.addingEvent}
             onModalClosed={this.modalClosedHandler}
-            superClose={this.modalSuperClose.bind(this)}
           />
           {this.renderEventList()}
         </View>

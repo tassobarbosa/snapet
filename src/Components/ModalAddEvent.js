@@ -47,7 +47,7 @@ export default class ModalAddEvent extends Component {
     });
 
 
-    this.props.superClose(false);
+    this.props.onModalClosed();
     this.clearState();
   }
 
@@ -79,7 +79,7 @@ export default class ModalAddEvent extends Component {
               currentEventValue={this.updateValue.bind(this)}
               currentEventTime={this.updateTime.bind(this)}
               currentEventDate={this.updateDate.bind(this)}
-            />            
+            />
           </View>
         </Modal>
       </View>

@@ -34,13 +34,6 @@ class VacinasScreen extends Component {
     }
   }
 
-  modalSuperClose(e){
-    this.setState({
-      addingEvent: null
-    });
-    //Refresh List
-    this.getEvents();
-  }
 
   modalClosedHandler = () => {
     this.setState({
@@ -55,7 +48,11 @@ class VacinasScreen extends Component {
   };
 
   componentDidMount() {
-      this.getEvents();
+    this.getEvents();
+
+      checkBalanceTimer = setInterval(() => {
+        this.getEvents();
+      }, 20000)
   }
 
   getEvents = () => {
@@ -126,7 +123,6 @@ renderEventList(){
             eventAddress='/vacinas'
             addingEvent={this.state.addingEvent}
             onModalClosed={this.modalClosedHandler}
-            superClose={this.modalSuperClose.bind(this)}
           />
           {this.renderEventList()}
         </View>
