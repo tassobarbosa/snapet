@@ -76,6 +76,7 @@ export default class UserForm extends Component {
               placeholder='Email'
               onChangeText={value => this.onUpdateUserEmail(value)}
               value={this.state.userEmail}
+              keyboardType='email-address'
             />
 
             <TouchableOpacity onPress={() => this.setDateAndroid()}>

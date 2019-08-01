@@ -116,6 +116,7 @@ export default class EventDataForm extends Component {
                 placeholder={this.props.placeholder}
                 onChangeText={value => this.onUpdateValue(value)}
                 value={this.state.value}
+                keyboardType='number-pad'
               />
         </KeyboardAvoidingView>
       </ScrollView>

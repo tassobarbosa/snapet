@@ -30,6 +30,7 @@ export default class DefaultInput extends Component {
           value={this.state.placeName}
           onChangeText={this.placeNameChangedHandler}
           style={styles.placeInput}
+          keyboardType={this.props.keyboardType}
         />
 
     );

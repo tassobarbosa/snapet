@@ -11,6 +11,7 @@ import CareChart from '../../Components/CareChart';
 import CareButton from '../../Components/UI/CareButton';
 import Icon from "react-native-vector-icons/Ionicons";
 import CommonStyles from '../../Stylesheets/Common';
+import FoodHeader from '../Food/FoodHeader';
 
 class CareScreen extends Component {
   constructor(props){
@@ -103,6 +104,7 @@ class CareScreen extends Component {
   render(){
     return(
       <View style={styles.container}>
+        <FoodHeader />
         <CareButton name='Banho e Tosa' iconName='md-cut' onPress={this.goToPetshop}/>
         <CareButton name='Veterinário' iconName='md-medkit' onPress={this.goToVeterinario}/>
         <CareButton name='Cartão de vacinas' iconName='md-pulse' onPress={this.goToVacinas}/>
@@ -115,7 +117,6 @@ class CareScreen extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 50,
     backgroundColor: CommonStyles.screenBackgroundColor,
     flex: 1
   }

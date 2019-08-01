@@ -65,6 +65,18 @@ export default class FoodForm extends Component {
             onChangeText={value => this.onUpdateMealName(value)}
             value={this.state.mealName}
           />
+          <TextInput
+              style={[styles.pickerContainer, styles.inputText]}
+              placeholder='Nome da refeição'
+              onChangeText={value => this.onUpdateMealName(value)}
+              value={this.state.mealName}
+            />
+            <TextInput
+                style={[styles.pickerContainer, styles.inputText]}
+                placeholder='Nome da refeição'
+                onChangeText={value => this.onUpdateMealName(value)}
+                value={this.state.mealName}
+              />                      
 
           <TouchableOpacity onPress={() => this.setTimeAndroid()}>
             <View style={styles.pickerContainer}>
@@ -129,7 +141,7 @@ const styles = StyleSheet.create({
   sliderContainer: {
     alignItems: "center",
     paddingTop: 20,
-  }, 
+  },
   textItem: {
     fontSize: 20,
     fontWeight: 'bold',

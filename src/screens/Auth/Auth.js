@@ -31,9 +31,11 @@ loginHandler = () => {
               <View style={styles.inputContainer}>
                 <DefaultInput
                   placeholder="usuario"
+                  keyboardType="email-address"
                 />
                 <DefaultInput
                   placeholder="senha"
+                  keyboardType="number-pad"
                 />
                 <DefaultButton label='LOGIN' onPress={this.loginHandler}/>
               </View>
@@ -48,7 +50,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center",    
+    alignItems: "center",
   },
   backgroundImage: {
     flex: 1,
