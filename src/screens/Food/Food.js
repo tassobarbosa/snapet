@@ -34,10 +34,6 @@ class FoodScreen extends Component {
         }, 20000)
   }
 
-  componentWillUnmount() {
-    this.global.checkBalanceTimer.remove()
-  }
-
   getEvents = () => {
     fetch(serverUrl+"meals.json")
     .then(res => res.json())

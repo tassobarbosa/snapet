@@ -39,6 +39,10 @@ class DadosPetScreen extends Component {
 
   componentDidMount() {
       this.getPetData();
+
+        global.checkBalanceTimer = setInterval(() => {
+          this.getPetData();
+        }, 20000)
   }
 
   getPetData = () => {
@@ -67,8 +71,6 @@ class DadosPetScreen extends Component {
     this.setState({
       modalVisible: null
     });
-    //Refresh List
-    this.getPetData();
   };
 
   modalOpenHandler = () => {

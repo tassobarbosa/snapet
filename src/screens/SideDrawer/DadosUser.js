@@ -39,6 +39,10 @@ class DadosUserScreen extends Component {
 
   componentDidMount() {
       this.getUserData();
+
+        global.checkBalanceTimer = setInterval(() => {
+          this.getUserData();
+        }, 20000)
   }
 
   getUserData = () => {
@@ -67,8 +71,6 @@ class DadosUserScreen extends Component {
     this.setState({
       modalVisible: null
     });
-    //Refresh List
-    this.getUserData();
   };
 
   modalOpenHandler = () => {
