@@ -15,7 +15,7 @@ export default class FoodModal extends Component {
     this.state = {
         mealName: '',
         mealTime: '',
-        mealPortion: 0
+        mealPortion: 1
       };
   }
 
@@ -59,7 +59,7 @@ export default class FoodModal extends Component {
     this.setState({
       mealName: '',
       mealTime: '',
-      mealTime: 0
+      mealTime: 1
     });
   }
 
