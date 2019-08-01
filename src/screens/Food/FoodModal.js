@@ -2,7 +2,6 @@ import React, {Component}  from "react";
 import { Modal, View, Image, Text, Button, StyleSheet } from "react-native";
 
 import CloseButton from '../../Components/UI/CloseButton';
-import FoodImage from '../../assets/Images/comida.jpeg';
 import FoodForm from './FoodForm';
 import CommonStyles from '../../Stylesheets/Common';
 import DefaultButton from "../../Components/UI/DefaultButton";
@@ -76,7 +75,6 @@ export default class FoodModal extends Component {
               <CloseButton onPress={this.props.onModalClosed} />
               <DefaultButton label="Salvar" onPress={this.submitHandler} style={[{width: "35%", height: 40}]}/>
             </View>
-            <Image source={FoodImage} style={styles.foodImage}/>
             <FoodForm
               currentMealName = {this.updateName.bind(this)}
               currentMealTime={this.updateTime.bind(this)}
@@ -98,10 +96,5 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     marginBottom: 10
     //alignItems: "center"
-  },
-  foodImage: {
-    width: "100%",
-    height: 200,
-    paddingBottom: 20,
   },
 });

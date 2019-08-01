@@ -117,6 +117,7 @@ export default class EventDataForm extends Component {
                 onChangeText={value => this.onUpdateValue(value)}
                 value={this.state.value}
                 keyboardType='number-pad'
+                underlineColorAndroid="transparent"
               />
         </KeyboardAvoidingView>
       </ScrollView>

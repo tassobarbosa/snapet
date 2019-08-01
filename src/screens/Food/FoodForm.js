@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   TouchableNativeFeedback,
   Text,
+  Image,
   TextInput,
   StyleSheet,
   TimePickerAndroid,
@@ -13,6 +14,7 @@ import {
 } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import CommonStyles from '../../Stylesheets/Common';
+import FoodImage from '../../assets/Images/comida.jpeg';
 
 export default class FoodForm extends Component {
   state = {
@@ -59,25 +61,14 @@ export default class FoodForm extends Component {
     return(
       <ScrollView style={styles.formContainer}>
         <KeyboardAvoidingView behavior="padding" enabled>
+          <Image source={FoodImage} style={styles.foodImage}/>
         <TextInput
             style={[styles.pickerContainer, styles.inputText]}
             placeholder='Nome da refeição'
             onChangeText={value => this.onUpdateMealName(value)}
             value={this.state.mealName}
+            underlineColorAndroid="transparent"
           />
-          <TextInput
-              style={[styles.pickerContainer, styles.inputText]}
-              placeholder='Nome da refeição'
-              onChangeText={value => this.onUpdateMealName(value)}
-              value={this.state.mealName}
-            />
-            <TextInput
-                style={[styles.pickerContainer, styles.inputText]}
-                placeholder='Nome da refeição'
-                onChangeText={value => this.onUpdateMealName(value)}
-                value={this.state.mealName}
-              />                      
-
           <TouchableOpacity onPress={() => this.setTimeAndroid()}>
             <View style={styles.pickerContainer}>
               <Icon name="ios-time" size={25} style={styles.iconPicker}/>
@@ -114,6 +105,11 @@ const styles = StyleSheet.create({
   formContainer: {
     paddingTop: 10,
     marginBottom: 50,
+  },
+  foodImage: {
+    width: "100%",
+    height: 200,
+    marginBottom: 20,
   },
   eventName: {
     fontWeight: "bold",

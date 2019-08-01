@@ -70,6 +70,7 @@ export default class UserForm extends Component {
             placeholder='Nome do Usuário'
             onChangeText={value => this.onUpdateUserName(value)}
             value={this.state.userName}
+            underlineColorAndroid="transparent"
           />
           <TextInput
               style={[styles.pickerContainer, styles.inputText]}
@@ -77,6 +78,7 @@ export default class UserForm extends Component {
               onChangeText={value => this.onUpdateUserEmail(value)}
               value={this.state.userEmail}
               keyboardType='email-address'
+              underlineColorAndroid="transparent"
             />
 
             <TouchableOpacity onPress={() => this.setDateAndroid()}>

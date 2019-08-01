@@ -70,12 +70,14 @@ export default class PetForm extends Component {
             placeholder='Nome do Pet'
             onChangeText={value => this.onUpdatePetName(value)}
             value={this.state.petName}
+            underlineColorAndroid="transparent"
           />
           <TextInput
               style={[styles.pickerContainer, styles.inputText]}
               placeholder='Raça'
               onChangeText={value => this.onUpdatePetBreed(value)}
               value={this.state.petBreed}
+              underlineColorAndroid="transparent"
             />
 
             <TouchableOpacity onPress={() => this.setDateAndroid()}>
