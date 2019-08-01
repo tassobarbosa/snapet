@@ -3,6 +3,8 @@ import { Modal, View, Image, Text, Button, StyleSheet } from "react-native";
 
 import CloseButton from '../../Components/UI/CloseButton';
 import PetForm from './PetForm';
+import CommonStyles from '../../Stylesheets/Common';
+import DefaultButton from "../../Components/UI/DefaultButton";
 
 import { serverUrl } from '../../Config/Settings.js'
 
@@ -80,7 +82,7 @@ export default class PetModal extends Component {
         <View style={styles.modalContainer}>
           <View style={styles.buttonContainer}>
             <CloseButton onPress={this.props.onModalClosed} />
-            <Button title="Salvar" onPress={this.submitHandler}/>
+            <DefaultButton label="Salvar" onPress={this.submitHandler} style={[{width: "35%", height: 40}]}/>
           </View>
           <PetForm
             currentPetName = {this.updateName.bind(this)}

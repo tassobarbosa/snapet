@@ -1,5 +1,7 @@
 import React, {Component} from "react";
 import {
+  ScrollView,
+  KeyboardAvoidingView,
   View,
   TouchableOpacity,
   TouchableNativeFeedback,
@@ -61,15 +63,16 @@ export default class PetForm extends Component {
 
   render(){
     return(
-      <View style={styles.container}>
+      <ScrollView style={styles.formContainer}>
+        <KeyboardAvoidingView behavior="padding" enabled>
         <TextInput
-            style={styles.inputText}
+            style={[styles.pickerContainer, styles.inputText]}
             placeholder='Nome do Pet'
             onChangeText={value => this.onUpdatePetName(value)}
             value={this.state.petName}
           />
           <TextInput
-              style={styles.inputText}
+              style={[styles.pickerContainer, styles.inputText]}
               placeholder='Raça'
               onChangeText={value => this.onUpdatePetBreed(value)}
               value={this.state.petBreed}
@@ -83,14 +86,36 @@ export default class PetForm extends Component {
                 </Text>
               </View>
             </TouchableOpacity>
-      </View>
+          </KeyboardAvoidingView>
+        </ScrollView>
     )
   }
 }
 
 
 const styles = StyleSheet.create({
-  container: {
-
-  }
+  formContainer: {
+    paddingTop: 10,
+    marginBottom: 50,
+  },
+  eventName: {
+    fontWeight: "bold",
+    textAlign: "center",
+    fontSize: 28,
+    paddingBottom: 10,
+  },
+  pickerContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    padding: 10,
+    backgroundColor: "#eee",
+    borderWidth: 0.5,
+    borderColor: '#d6d7da',
+  },
+  inputText: {
+    fontSize: 18,
+  },
+  iconPicker: {
+    marginRight: 20
+  },
 });
