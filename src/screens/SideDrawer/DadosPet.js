@@ -9,6 +9,7 @@ import {
 } from "react-native";
 
 import PetModal from './PetModal';
+import CommonStyles from '../../Stylesheets/Common';
 import { serverUrl } from '../../Config/Settings.js'
 
 class DadosPetScreen extends Component {
@@ -83,13 +84,31 @@ class DadosPetScreen extends Component {
           onModalClosed={this.modalClosedHandler}
           internKey={this.state.key}
         />
+       <Text> Foto</Text>
 
-        <Text> Nome: {this.state.petName}</Text>
-        <Text> Raça: {this.state.petBreed}</Text>
-        <Text> Nascimento: {this.state.petBirth}</Text>
-        <Text> chave: {this.state.key}</Text>
-        <Text> Foto</Text>
-        <View>
+       <View style={styles.informationContainer}>
+          <View style={styles.informationLine}>
+            <Text style={styles.textTitle}>Nome: </Text>
+            <Text style={styles.textInfo}>{this.state.petName}</Text>
+          </View>
+
+          <View style={styles.informationLine}>
+            <Text style={styles.textTitle}>Raça: </Text>
+            <Text style={styles.textInfo}>{this.state.petBreed}</Text>
+          </View>
+
+          <View style={styles.informationLine}>
+            <Text style={styles.textTitle}>Nascimento: </Text>
+            <Text style={styles.textInfo}>{this.state.petBirth}</Text>
+          </View>
+
+          <View style={styles.informationLine}>
+            <Text style={styles.textTitle}>Chave: </Text>
+            <Text style={styles.textInfo}>{this.state.key}</Text>
+          </View>
+       </View>
+
+        <View style={styles.buttonContainer}>
           <Button title="Alterar foto"/>
           <Button title="Alterar dados" onPress={this.modalOpenHandler}/>
         </View>
@@ -100,9 +119,37 @@ class DadosPetScreen extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 50,
+    flex: 1,
+    backgroundColor: CommonStyles.screenBackgroundColor
+  },
+  informationContainer: {
+    margin: 10,
     backgroundColor: "white",
-    flex: 1
+  },
+  informationLine: {
+    flexDirection: 'row',
+    paddingLeft: 15,
+    paddingTop: 5,
+    paddingBottom: 5,
+  },
+  textTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    color: CommonStyles.mainColor,
+},
+  textInfo: {
+    fontSize: 16,
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    color: 'black',
+},
+  buttonContainer:{
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: "80%",
+    marginLeft: "10%"
   }
 });
 
