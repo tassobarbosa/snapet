@@ -10,6 +10,7 @@ import {
 
 import PetModal from './PetModal';
 import CommonStyles from '../../Stylesheets/Common';
+import DefaultButton from "../../Components/UI/DefaultButton";
 import { serverUrl } from '../../Config/Settings.js'
 
 class DadosPetScreen extends Component {
@@ -109,8 +110,8 @@ class DadosPetScreen extends Component {
        </View>
 
         <View style={styles.buttonContainer}>
-          <Button title="Alterar foto"/>
-          <Button title="Alterar dados" onPress={this.modalOpenHandler}/>
+          <DefaultButton label="Alterar foto" style={[{width: "40%"}]}/>
+          <DefaultButton label="Alterar dados" style={[{width: "40%"}]} onPress={this.modalOpenHandler}/>
         </View>
       </View>
     );

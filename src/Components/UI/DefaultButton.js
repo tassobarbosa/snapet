@@ -11,21 +11,24 @@ import Icon from "react-native-vector-icons/Ionicons";
 import CommonStyles from '../../Stylesheets/Common';
 
 const defaultButton = props => (
+  <View style={[styles.outerContainer, props.style]}>
   <TouchableOpacity onPress={props.onPress} style={styles.buttonContainer}>
-    <View style={styles.buttonContainer}>
       <Text style={styles.text}>{props.label}</Text>
-    </View>
   </TouchableOpacity>
+  </View>
 )
 
 
 const styles = StyleSheet.create({
+  outerContainer:{
+    height: 50,
+    width: "100%",  //The Width must be the same as the height
+    backgroundColor: CommonStyles.mainColor,
+    borderRadius: 5,
+    elevation: 2, // Android
+  },
   buttonContainer: {
-      height: 50,
-      width: "100%",  //The Width must be the same as the height
-      backgroundColor: CommonStyles.mainColor,
-      borderRadius: 5,
-      elevation: 2, // Android
+    flex: 1,
       justifyContent: 'center',
       alignItems: "center",
   },
