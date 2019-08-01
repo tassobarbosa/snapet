@@ -84,9 +84,10 @@ class FoodScreen extends Component {
             onItemSelected={this.eventSelectedHandler}
           />
         </View>
-        <View style={styles.addButtonContainer}>
-          <FoodButton onPress={this.modalOpenHandler}/>
-        </View>
+
+          <View style={styles.buttonContainer}>
+            <FoodButton onPress={this.modalOpenHandler}/>
+          </View>
 
       </View>
     );
@@ -96,20 +97,17 @@ class FoodScreen extends Component {
 const styles = StyleSheet.create({
     container: {
       flex:1,
-      flexDirection: 'column',
-      //backgroundColor: "#eee",
       backgroundColor: CommonStyles.screenBackgroundColor,
     },
     bodyContainer:{
+      flex: 2,
       padding: 10,
-      height: 380,
     },
-    addButtonContainer: {
-      position: 'absolute',
-      bottom: 10,
+    buttonContainer: {
       width: "100%",
+      marginBottom: 10,
       justifyContent: 'center',
-      alignItems: "center",
+      alignItems: "center"
     }
 });
 

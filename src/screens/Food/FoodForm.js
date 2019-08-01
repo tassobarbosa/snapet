@@ -1,5 +1,7 @@
 import React, {Component} from "react";
 import {
+  ScrollView,
+  KeyboardAvoidingView,
   View,
   TouchableOpacity,
   TouchableNativeFeedback,
@@ -10,7 +12,7 @@ import {
   Slider
 } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
-
+import CommonStyles from '../../Stylesheets/Common';
 
 export default class FoodForm extends Component {
   state = {
@@ -55,10 +57,11 @@ export default class FoodForm extends Component {
 
   render(){
     return(
-      <View style={styles.container}>
+      <ScrollView style={styles.formContainer}>
+        <KeyboardAvoidingView behavior="padding" enabled>
         <TextInput
-            style={styles.inputText}
-            placeholder='Nome da refeicao'
+            style={[styles.pickerContainer, styles.inputText]}
+            placeholder='Nome da refeição'
             onChangeText={value => this.onUpdateMealName(value)}
             value={this.state.mealName}
           />
@@ -72,26 +75,72 @@ export default class FoodForm extends Component {
             </View>
           </TouchableOpacity>
 
-
-          <Slider
-            style={{width: 200, height: 40}}
-            minimumValue={1}
-            maximumValue={5}
-            step={1}
-            minimumTrackTintColor="#456456"
-            maximumTrackTintColor="#000000"
-            onValueChange={value => this.onUpdateMealPortion(value)}
-          />
-          <Text>{this.state.mealPortion}</Text>
-
+      <View style={styles.sliderContainer}>
+        <Slider
+          style={styles.sliderStyle}
+          minimumValue={1}
+          maximumValue={5}
+          step={1}
+          minimumTrackTintColor="#456456"
+          maximumTrackTintColor="#000000"
+          onValueChange={value => this.onUpdateMealPortion(value)}
+        />
+        <View>
+          <Text style={styles.textItem}>{this.state.mealPortion}</Text>
+          <Text style={styles.textTitle}>porções</Text>
+        </View>
       </View>
+
+        </KeyboardAvoidingView>
+      </ScrollView>
     )
   }
 }
 
 
 const styles = StyleSheet.create({
-  container: {
-
-  }
+  formContainer: {
+    paddingTop: 10,
+    marginBottom: 50,
+  },
+  eventName: {
+    fontWeight: "bold",
+    textAlign: "center",
+    fontSize: 28,
+    paddingBottom: 10,
+  },
+  pickerContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    padding: 10,
+    backgroundColor: "#eee",
+    borderWidth: 0.5,
+    borderColor: '#d6d7da',
+  },
+  inputText: {
+    fontSize: 18,
+  },
+  iconPicker: {
+    marginRight: 20
+  },
+  sliderStyle: {
+    width: "100%",
+  },
+  sliderContainer: {
+    alignItems: "center",
+    paddingTop: 20,
+  }, 
+  textItem: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    color: CommonStyles.mainColor,
+    paddingTop: 10,
+},
+textTitle: {
+  fontSize: 18,
+  fontWeight: 'bold',
+  textAlign: 'center',
+}
 });
