@@ -9,6 +9,7 @@ import {
 } from "react-native";
 
 import PetModal from './PetModal';
+import CameraPhotoModal from '../../Components/CameraPhotoModal';
 import CommonStyles from '../../Stylesheets/Common';
 import DefaultButton from "../../Components/UI/DefaultButton";
 import { serverUrl } from '../../Config/Settings.js'
@@ -21,6 +22,7 @@ class DadosPetScreen extends Component {
 
   state = {
     modalVisible: null,
+    modalCameraVisible: null,
     petName: '',
     petBreed: '',
     petBirth: '',
@@ -79,6 +81,18 @@ class DadosPetScreen extends Component {
     });
   };
 
+  modalCameraClosed = () => {
+    this.setState({
+      modalCameraVisible: null
+    });
+  };
+
+  modalCameraOpen = () => {
+    this.setState({
+      modalCameraVisible: true
+    });
+  };
+
   render(){
     return(
       <View style={styles.container}>
@@ -87,6 +101,12 @@ class DadosPetScreen extends Component {
           onModalClosed={this.modalClosedHandler}
           internKey={this.state.key}
         />
+        <CameraPhotoModal
+          openModal={this.state.modalCameraVisible}
+          onModalClosed={this.modalCameraClosed}
+          //internKey={this.state.key}
+        />
+
        <Text> Foto</Text>
 
        <View style={styles.informationContainer}>
@@ -112,7 +132,7 @@ class DadosPetScreen extends Component {
        </View>
 
         <View style={styles.buttonContainer}>
-          <DefaultButton label="Alterar foto" style={[{width: "40%"}]}/>
+          <DefaultButton label="Alterar foto" style={[{width: "40%"}]} onPress={this.modalCameraOpen}/>
           <DefaultButton label="Alterar dados" style={[{width: "40%"}]} onPress={this.modalOpenHandler}/>
         </View>
       </View>

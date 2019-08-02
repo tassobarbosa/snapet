@@ -1,22 +1,18 @@
 import React, {Component} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {
+  Modal,
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet} from 'react-native';
+
 import { RNCamera } from 'react-native-camera';
+import CloseButton from './UI/CloseButton';
 
 
-class CameraScreen extends Component {
-  constructor(props){
+class CameraPhotoModal extends Component {
+  constructor(props) {
     super(props);
-    this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent);
-  }
-
-  onNavigatorEvent = event => {
-    if(event.type === "NavBarButtonPress"){
-      if(event.id === "sideDrawerToggle"){
-        this.props.navigator.toggleDrawer({
-          side: "left"
-        })
-      }
-    }
   }
 
   takePicture = async() => {
@@ -29,13 +25,18 @@ class CameraScreen extends Component {
 
   render() {
     return (
+      <Modal
+        onRequestClose={this.props.onModalClosed}
+        visible={this.props.openModal !== null}
+        animationType="slide"
+      >
       <View style={styles.container}>
         <RNCamera
           ref={ref => {
             this.camera = ref;
           }}
           style={styles.preview}
-          type={RNCamera.Constants.Type.front}
+          type={RNCamera.Constants.Type.back}
           flashMode={RNCamera.Constants.FlashMode.on}
           androidCameraPermissionOptions={{
             title: 'Permission to use camera',
@@ -43,22 +44,18 @@ class CameraScreen extends Component {
             buttonPositive: 'Ok',
             buttonNegative: 'Cancel',
           }}
-          androidRecordAudioPermissionOptions={{
-            title: 'Permission to use audio recording',
-            message: 'We need your permission to use your audio',
-            buttonPositive: 'Ok',
-            buttonNegative: 'Cancel',
-          }}
-          onGoogleVisionBarcodesDetected={({ barcodes }) => {
-            console.log(barcodes);
-          }}
-        />
-        <View style={{ flex: 0, flexDirection: 'row', justifyContent: 'center' }}>
-          <TouchableOpacity onPress={this.takePicture.bind(this)} style={styles.capture}>
-            <Text style={{ fontSize: 14 }}> SNAP </Text>
-          </TouchableOpacity>
-        </View>
+        >
+          <View style={styles.buttonContainer}>
+            <CloseButton onPress={this.props.onModalClosed} />
+          </View>
+          <View style={{ flex: 0, flexDirection: 'row', justifyContent: 'center' }}>
+            <TouchableOpacity onPress={this.takePicture.bind(this)} style={styles.capture}>
+              <Text style={{ fontSize: 14 }}> SNAP </Text>
+            </TouchableOpacity>
+          </View>
+        </RNCamera>
       </View>
+    </Modal>
     );
   }
 }
@@ -68,6 +65,11 @@ container: {
   flex: 1,
   flexDirection: 'column',
   backgroundColor: 'black',
+},
+buttonContainer: {
+  position: 'absolute',
+  top: 10,
+  left: 10,
 },
 preview: {
   flex: 1,
@@ -85,4 +87,4 @@ capture: {
 },
 });
 
-export default CameraScreen;
+export default CameraPhotoModal;
