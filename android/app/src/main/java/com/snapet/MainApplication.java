@@ -3,6 +3,7 @@ package com.snapet;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.reactnativecommunity.slider.ReactSliderPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -27,7 +28,8 @@ public class MainApplication extends NavigationApplication {
     // No need to add RnnPackage and MainReactPackage
     return Arrays.<ReactPackage>asList(
       new VectorIconsPackage(),
-      new SvgPackage()
+      new SvgPackage(),
+      new ReactSliderPackage()
     );
   }
 

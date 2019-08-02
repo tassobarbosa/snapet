@@ -9,9 +9,10 @@ import {
   Image,
   TextInput,
   StyleSheet,
-  TimePickerAndroid,
-  Slider
+  TimePickerAndroid
 } from "react-native";
+
+import Slider from '@react-native-community/slider';
 import Icon from "react-native-vector-icons/Ionicons";
 import CommonStyles from '../../Stylesheets/Common';
 import FoodImage from '../../assets/Images/comida.jpeg';
