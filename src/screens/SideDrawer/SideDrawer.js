@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {
   View,
   Text,
+  Image,
   Dimensions,
   StyleSheet,
   TouchableOpacity,
@@ -11,10 +12,19 @@ import {
 import DrawerButton from '../../Components/UI/DrawerButton';
 import CommonStyles from '../../Stylesheets/Common';
 import Icon from "react-native-vector-icons/Ionicons";
+import { serverUrl } from '../../Config/Settings.js'
 import App from "../../../App";
 
 class SideDrawer extends Component {
 
+  state = {
+    encodedData: '',
+    key: ''
+  };
+
+  componentDidMount() {
+      this.getUserPhoto();
+  }
 
   goToDadosPet = () => {
     this.props.navigator.showModal({
@@ -34,12 +44,37 @@ class SideDrawer extends Component {
     App();
   }
 
+
+  getUserPhoto = () => {
+    fetch(serverUrl+"userphoto.json")
+    .then(res => res.json())
+    .then(parsedRes => {
+      console.log(parsedRes)
+      const dataEvents = [];
+      for(let key in parsedRes){
+        dataEvents.push({
+          ...parsedRes[key],
+          key: key
+        })
+      }
+       this.setState({
+         encodedData: dataEvents[0].base64,
+     });
+
+    })
+  }
+
   render() {
     return (
       <View style={styles.container}>
 
         <View style={styles.headerContainer}>
-          <Icon name="md-contact" size={50} color="#aaa" style={styles.headerIcon}/>
+          <View style={styles.imageContainer}>
+            <Image
+                style={styles.imageUser}
+                source={{uri: `data:image/gif;base64,${this.state.encodedData}`}}
+              />
+          </View>
           <Text style={styles.headerText}>Tasso Barbosa</Text>
         </View>
 
@@ -67,8 +102,20 @@ const styles = StyleSheet.create({
     borderWidth: 0.5,
     borderColor: '#d6d7da',
   },
-  headerIcon: {
-    marginRight: 20
+  imageContainer:{
+    height: 51,
+    width: 51,
+    marginRight: 10,
+    alignSelf: 'center',
+    borderRadius: 25,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 0.5,
+  },
+  imageUser: {
+    height: 50,
+    width: 50,
+    borderRadius: 25
   },
   headerText: {
     fontSize: 18,

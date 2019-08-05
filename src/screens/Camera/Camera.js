@@ -15,8 +15,8 @@ class CameraScreen extends Component {
   }
 
   onNavigatorEvent = event => {
+          this.videoClosedHandler();
     if(event.type === "NavBarButtonPress"){
-      this.videoClosedHandler();
       if(event.id === "sideDrawerToggle"){
         this.props.navigator.toggleDrawer({
           side: "left"
@@ -54,8 +54,8 @@ class CameraScreen extends Component {
     }
     else{
       return(
-        <View>
-          <DefaultButton label='Acessar' style={[{width: "40%"}]} onPress={this.videoOpenHandler}/>
+        <View style={styles.buttonContainer}>
+          <DefaultButton label='Acessar camera' style={[{width: "40%"}]} onPress={this.videoOpenHandler}/>
         </View>
       )
     }
@@ -72,12 +72,19 @@ class CameraScreen extends Component {
 
 var styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   backgroundVideo: {
     height: 300,
     width: 300
   },
+  buttonContainer:{
+    width: "100%",
+    alignItems: 'center',
+    justifyContent: 'center'
+  }
 });
 
 export default CameraScreen;
