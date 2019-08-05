@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {
   View,
   Text,
+  Image,
   Button,
   Dimensions,
   StyleSheet,
@@ -9,6 +10,7 @@ import {
 } from "react-native";
 
 import UserModal from './UserModal';
+import CameraPhotoModal from '../../Components/CameraPhotoModal';
 import CommonStyles from '../../Stylesheets/Common';
 import DefaultButton from "../../Components/UI/DefaultButton";
 import { serverUrl } from '../../Config/Settings.js'
@@ -21,9 +23,11 @@ class DadosUserScreen extends Component {
 
   state = {
     modalVisible: null,
+    modalCameraVisible: null,
     userName: '',
     userEmail: '',
     birthDate: '',
+    encodedData: '',
     key: ''
   };
 
@@ -39,7 +43,7 @@ class DadosUserScreen extends Component {
 
   componentDidMount() {
       this.getUserData();
-
+      this.getUserPhoto();
         global.checkBalanceTimer = setInterval(() => {
           this.getUserData();
         }, 20000)
@@ -67,6 +71,25 @@ class DadosUserScreen extends Component {
     })
   }
 
+  getUserPhoto = () => {
+    fetch(serverUrl+"userphoto.json")
+    .then(res => res.json())
+    .then(parsedRes => {
+      console.log(parsedRes)
+      const dataEvents = [];
+      for(let key in parsedRes){
+        dataEvents.push({
+          ...parsedRes[key],
+          key: key
+        })
+      }
+       this.setState({
+         encodedData: dataEvents[0].base64,
+     });
+
+    })
+  }
+
   modalClosedHandler = () => {
     this.setState({
       modalVisible: null
@@ -79,6 +102,31 @@ class DadosUserScreen extends Component {
     });
   };
 
+  modalCameraClosed = () => {
+    this.setState({
+      modalCameraVisible: null
+    });
+  };
+
+  modalCameraOpen = () => {
+    this.setState({
+      modalCameraVisible: true
+    });
+  };
+
+  post64photo = (userPhoto) => {
+        fetch(serverUrl+"userphoto.json",{
+          method: "POST",
+          body: JSON.stringify({
+            base64: userPhoto,
+          })
+        })
+        .catch(err => console.log(err))
+        .then(res => res.json())
+        .then(parsedRes => {
+          console.log(parsedRes);
+        });
+  }
 
   render(){
     return(
@@ -88,7 +136,18 @@ class DadosUserScreen extends Component {
           onModalClosed={this.modalClosedHandler}
           internKey={this.state.key}
         />
-<Text> Foto</Text>
+        <CameraPhotoModal
+          openModal={this.state.modalCameraVisible}
+          onModalClosed={this.modalCameraClosed}
+          pic64={this.post64photo}
+          //internKey={this.state.key}
+        />
+        <View style={styles.imageContainer}>
+          <Image
+              style={styles.imageUser}
+              source={{uri: `data:image/gif;base64,${this.state.encodedData}`}}
+            />
+        </View>
         <View style={styles.informationContainer}>
            <View style={styles.informationLine}>
              <Text style={styles.textTitle}>Nome: </Text>
@@ -112,7 +171,7 @@ class DadosUserScreen extends Component {
         </View>
 
          <View style={styles.buttonContainer}>
-           <DefaultButton label="Alterar foto" style={[{width: "40%"}]}/>
+           <DefaultButton label="Alterar foto" style={[{width: "40%"}]} onPress={this.modalCameraOpen}/>
            <DefaultButton label="Alterar dados" style={[{width: "40%"}]} onPress={this.modalOpenHandler}/>
          </View>
       </View>
@@ -124,6 +183,21 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: CommonStyles.screenBackgroundColor
+  },
+  imageContainer:{
+    height: 155,
+    width: 155,
+    marginTop: 30,
+    alignSelf: 'center',
+    borderRadius: 75,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 5,
+  },
+  imageUser: {
+    height: 150,
+    width: 150,
+    borderRadius: 75
   },
   informationContainer: {
     margin: 10,
