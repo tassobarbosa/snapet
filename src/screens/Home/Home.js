@@ -37,7 +37,7 @@ class HomeScreen extends Component {
         })
       }
        this.setState({
-         encodedData: dataEvents[0].address,
+         encodedData: dataEvents[0].base64,
      });
 
     })

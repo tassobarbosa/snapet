@@ -20,24 +20,9 @@ class CameraPhotoModal extends Component {
       const options = { quality: 0.5, base64: true };
       const data = await this.camera.takePictureAsync(options);
       console.log(data.base64);
-      this.submitHandler(data.base64);
+      this.props.pic64(data.base64);
     }
   };
-
-  submitHandler = (address) => {
-      fetch(serverUrl+"petphoto.json",{
-        method: "POST",
-        body: JSON.stringify({
-          address: address
-        })
-      })
-      .catch(err => console.log(err))
-      .then(res => res.json())
-      .then(parsedRes => {
-        console.log(parsedRes);
-      });
-  }
-
 
   render() {
     return (

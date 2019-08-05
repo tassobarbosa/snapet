@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {
   View,
   Text,
+  Image,
   Button,
   Dimensions,
   StyleSheet,
@@ -26,6 +27,7 @@ class DadosPetScreen extends Component {
     petName: '',
     petBreed: '',
     petBirth: '',
+    encodedData: '',
     key: ''
   };
 
@@ -41,6 +43,7 @@ class DadosPetScreen extends Component {
 
   componentDidMount() {
       this.getPetData();
+      this.getPetPhoto();
 
         global.checkBalanceTimer = setInterval(() => {
           this.getPetData();
@@ -64,6 +67,25 @@ class DadosPetScreen extends Component {
         petBreed: dataEvents[0].chosenPetBreed,
          petBirth: dataEvents[0].chosenPetBirth,
          key: dataEvents[0].key
+     });
+
+    })
+  }
+
+  getPetPhoto = () => {
+    fetch(serverUrl+"petphoto.json")
+    .then(res => res.json())
+    .then(parsedRes => {
+      console.log(parsedRes)
+      const dataEvents = [];
+      for(let key in parsedRes){
+        dataEvents.push({
+          ...parsedRes[key],
+          key: key
+        })
+      }
+       this.setState({
+         encodedData: dataEvents[0].base64,
      });
 
     })
@@ -93,6 +115,20 @@ class DadosPetScreen extends Component {
     });
   };
 
+  post64photo = (petPhoto) => {
+        fetch(serverUrl+"petphoto.json",{
+          method: "POST",
+          body: JSON.stringify({
+            base64: petPhoto,
+          })
+        })
+        .catch(err => console.log(err))
+        .then(res => res.json())
+        .then(parsedRes => {
+          console.log(parsedRes);
+        });
+  }
+
   render(){
     return(
       <View style={styles.container}>
@@ -104,10 +140,16 @@ class DadosPetScreen extends Component {
         <CameraPhotoModal
           openModal={this.state.modalCameraVisible}
           onModalClosed={this.modalCameraClosed}
+          pic64={this.post64photo}
           //internKey={this.state.key}
         />
 
-       <Text> Foto</Text>
+        <View style={styles.imageContainer}>
+          <Image
+              style={styles.imagePet}
+              source={{uri: `data:image/gif;base64,${this.state.encodedData}`}}
+            />
+        </View>
 
        <View style={styles.informationContainer}>
           <View style={styles.informationLine}>
@@ -144,6 +186,21 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: CommonStyles.screenBackgroundColor
+  },
+  imageContainer:{
+    height: 155,
+    width: 155,
+    marginTop: 30,
+    alignSelf: 'center',
+    borderRadius: 75,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 5,
+  },
+  imagePet: {
+    height: 150,
+    width: 150,
+    borderRadius: 75
   },
   informationContainer: {
     margin: 10,
