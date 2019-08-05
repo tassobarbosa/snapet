@@ -3,6 +3,7 @@ package com.snapet;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.brentvatne.react.ReactVideoPackage;
 import org.reactnative.camera.RNCameraPackage;
 import com.reactnativecommunity.slider.ReactSliderPackage;
 import com.facebook.react.ReactNativeHost;
@@ -31,7 +32,8 @@ public class MainApplication extends NavigationApplication {
       new VectorIconsPackage(),
       new SvgPackage(),
       new ReactSliderPackage(),
-      new RNCameraPackage()
+      new RNCameraPackage(),
+      new ReactVideoPackage()
     );
   }
 
