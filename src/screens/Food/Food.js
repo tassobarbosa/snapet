@@ -68,7 +68,6 @@ class FoodScreen extends Component {
 
     if(event.type === "ScreenChangedEvent"){
       if(event.id === "willAppear"){
-        console.log('pegando lista')
           this.getEvents();
       }
     }

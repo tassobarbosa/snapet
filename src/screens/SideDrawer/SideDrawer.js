@@ -18,11 +18,14 @@ import App from "../../../App";
 class SideDrawer extends Component {
 
   state = {
+    userName: '',
+    keyUser: '',
     encodedData: '',
     key: ''
   };
 
   componentDidMount() {
+    this.getUserData();
       this.getUserPhoto();
   }
 
@@ -42,6 +45,25 @@ class SideDrawer extends Component {
 
   gotToRoot = () => {
     App();
+  }
+
+  getUserData = () => {
+    fetch(serverUrl+"userdata.json")
+    .then(res => res.json())
+    .then(parsedRes => {
+      console.log(parsedRes)
+      const dataEvents = [];
+      for(let key in parsedRes){
+        dataEvents.push({
+          ...parsedRes[key],
+          keyUser: key
+        })
+      }
+       this.setState({
+         userName: dataEvents[0].userName,
+     });
+
+    })
   }
 
 
@@ -75,7 +97,7 @@ class SideDrawer extends Component {
                 source={{uri: `data:image/gif;base64,${this.state.encodedData}`}}
               />
           </View>
-          <Text style={styles.headerText}>Tasso Barbosa</Text>
+          <Text style={styles.headerText}>{this.state.userName}</Text>
         </View>
 
         <DrawerButton name='Dados Pet' iconName='md-paw' onPress={this.goToDadosPet}/>

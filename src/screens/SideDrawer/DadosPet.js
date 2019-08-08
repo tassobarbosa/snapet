@@ -39,16 +39,14 @@ class DadosPetScreen extends Component {
         })
       }
     }
+    if(event.type === "ScreenChangedEvent"){
+      if(event.id === "willAppear"){
+        this.getPetData();
+        this.getPetPhoto();
+      }
+    }
   }
 
-  componentDidMount() {
-      this.getPetData();
-      this.getPetPhoto();
-
-        global.checkBalanceTimer = setInterval(() => {
-          this.getPetData();
-        }, 20000)
-  }
 
   getPetData = () => {
     fetch(serverUrl+"petdata.json")
@@ -95,6 +93,7 @@ class DadosPetScreen extends Component {
     this.setState({
       modalVisible: null
     });
+    this.getPetData();
   };
 
   modalOpenHandler = () => {
@@ -107,6 +106,7 @@ class DadosPetScreen extends Component {
     this.setState({
       modalCameraVisible: null
     });
+    this.getPetPhoto();
   };
 
   modalCameraOpen = () => {

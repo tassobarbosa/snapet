@@ -39,14 +39,12 @@ class DadosUserScreen extends Component {
         })
       }
     }
-  }
-
-  componentDidMount() {
-      this.getUserData();
-      this.getUserPhoto();
-        global.checkBalanceTimer = setInterval(() => {
-          this.getUserData();
-        }, 20000)
+    if(event.type === "ScreenChangedEvent"){
+      if(event.id === "willAppear"){
+        this.getUserData();
+        this.getUserPhoto();
+      }
+    }
   }
 
   getUserData = () => {
@@ -94,6 +92,7 @@ class DadosUserScreen extends Component {
     this.setState({
       modalVisible: null
     });
+    this.getUserData();
   };
 
   modalOpenHandler = () => {
@@ -106,6 +105,7 @@ class DadosUserScreen extends Component {
     this.setState({
       modalCameraVisible: null
     });
+    this.getUserPhoto();
   };
 
   modalCameraOpen = () => {
