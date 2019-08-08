@@ -38,7 +38,8 @@ export default class CameraVideoModal extends Component {
 
 const styles = StyleSheet.create({
   modalContainer: {
-    flex: 1
+    flex: 1,
+    backgroundColor: 'black'
   },
   buttonContainer: {
     position: 'absolute',
@@ -48,6 +49,7 @@ const styles = StyleSheet.create({
   },
   backgroundVideo: {
     height: "100%",
-    width: "100%"
+    width: "100%",
+    backgroundColor: 'black'
   },
 });
