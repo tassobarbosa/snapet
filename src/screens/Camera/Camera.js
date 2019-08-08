@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {View, Button, Text, TouchableOpacity, StyleSheet} from 'react-native';
-import Video from 'react-native-video';
 import { RNCamera } from 'react-native-camera';
+import CameraVideoModal from "./CameraVideoModal";
 import DefaultButton from "../../Components/UI/DefaultButton";
 
 class CameraScreen extends Component {
@@ -40,16 +40,10 @@ class CameraScreen extends Component {
   renderVideo(){
     if(this.state.videoVisible){
       return(
-        <TouchableOpacity onPress={this.videoClosedHandler}>
-          <Video source={{uri: "http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4"}}   // Can be a URL or a local file.
-               ref={(ref) => {
-                 this.player = ref
-               }}                                      // Store reference
-             onBuffer={this.onBuffer}                // Callback when remote video is buffering
-             onError={this.videoError}               // Callback when video cannot be loaded
-             style={styles.backgroundVideo}
-           />
-        </TouchableOpacity>
+        <CameraVideoModal
+          onModalClosed={this.videoClosedHandler}
+          videoVisible={this.state.videoVisible}
+        />
       )
     }
     else{
@@ -75,10 +69,6 @@ var styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center'
-  },
-  backgroundVideo: {
-    height: 300,
-    width: 300
   },
   buttonContainer:{
     width: "100%",
