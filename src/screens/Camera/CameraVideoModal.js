@@ -11,27 +11,25 @@ export default class CameraVideoModal extends Component {
 
   render(){
     return (
-      <View>
+      <View style={styles.modalContainer}>
         <Modal
           onRequestClose={this.props.onModalClosed}
           visible={this.props.videoVisible !== null}
           animationType="slide"
         >
-          <View style={styles.modalContainer}>
             <View style={styles.buttonContainer}>
               <CloseButton onPress={this.props.onModalClosed} />
             </View>
-             <TouchableOpacity onPress={this.videoClosedHandler}>
                <Video source={{uri: "http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4"}}   // Can be a URL or a local file.
                    ref={(ref) => {
                      this.player = ref
                    }}                                      // Store reference
+                  fullscreen={true}
                  onBuffer={this.onBuffer}                // Callback when remote video is buffering
                  onError={this.videoError}               // Callback when video cannot be loaded
                  style={styles.backgroundVideo}
+                 resizeMode='contain'
                />
-            </TouchableOpacity>
-          </View>
         </Modal>
       </View>
     );
@@ -40,17 +38,16 @@ export default class CameraVideoModal extends Component {
 
 const styles = StyleSheet.create({
   modalContainer: {
-    margin: 22
+    flex: 1
   },
   buttonContainer: {
-    width: "100%",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginBottom: 10
-    //alignItems: "center"
+    position: 'absolute',
+    top: 10,
+    left: 10,
+    zIndex: 10
   },
   backgroundVideo: {
-    height: 300,
-    width: 300
-  },  
+    height: "100%",
+    width: "100%"
+  },
 });
