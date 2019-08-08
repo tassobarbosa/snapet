@@ -32,12 +32,19 @@ class VeterinarioScreen extends Component {
         });
       }
     }
+    if(event.type === "ScreenChangedEvent"){
+      if(event.id === "willAppear"){
+        console.log('pegando lista')
+          this.getEvents();
+      }
+    }
   }
 
   modalClosedHandler = () => {
     this.setState({
       addingEvent: null
     });
+    this.getEvents();
   };
 
   modalOpenHandler = () => {
@@ -45,14 +52,6 @@ class VeterinarioScreen extends Component {
       addingEvent: true
     });
   };
-
-  componentDidMount() {
-    this.getEvents();
-
-      checkBalanceTimer = setInterval(() => {
-        this.getEvents();
-      }, 20000)
-  }
 
   getEvents = () => {
     fetch(serverUrl+"veterinario.json")

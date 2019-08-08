@@ -29,6 +29,7 @@ class PetShopScreen extends Component {
     this.setState({
       addingEvent: null
     });
+    this.getEvents();
   };
 
   modalOpenHandler = () => {
@@ -45,15 +46,14 @@ class PetShopScreen extends Component {
         });
       }
     }
+    if(event.type === "ScreenChangedEvent"){
+      if(event.id === "willAppear"){
+        console.log('pegando lista')
+          this.getEvents();
+      }
+    }
   }
 
-  componentDidMount() {
-    this.getEvents();
-
-      checkBalanceTimer = setInterval(() => {
-        this.getEvents();
-      }, 20000)
-  }
 
   getEvents = () => {
     fetch(serverUrl+"petshop.json")

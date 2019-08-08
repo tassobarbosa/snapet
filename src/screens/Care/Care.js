@@ -23,7 +23,7 @@ class CareScreen extends Component {
       };
   }
 
-  onNavigatorEvent = event => {
+  onNavigatorEvent = event => {    
     if(event.type === "NavBarButtonPress"){
       if(event.id === "sideDrawerToggle"){
         this.props.navigator.toggleDrawer({

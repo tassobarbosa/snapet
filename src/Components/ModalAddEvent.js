@@ -44,11 +44,9 @@ export default class ModalAddEvent extends Component {
     .then(res => res.json())
     .then(parsedRes => {
       console.log(parsedRes);
+      this.props.onModalClosed();
+      this.clearState();
     });
-
-
-    this.props.onModalClosed();
-    this.clearState();
   }
 
   clearState(){
