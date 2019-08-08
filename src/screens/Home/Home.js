@@ -19,11 +19,6 @@ class HomeScreen extends Component {
     petName: ''
   }
 
-  componentDidMount() {
-      this.getPetPhoto();
-      this.getPetName();
-  }
-
   getPetPhoto = () => {
     fetch(serverUrl+"petphoto.json")
     .then(res => res.json())
@@ -62,6 +57,7 @@ class HomeScreen extends Component {
   }
 
   onNavigatorEvent = event => {
+    console.log(event);
     if(event.type === "NavBarButtonPress"){
       if(event.id === "sideDrawerToggle"){
         this.props.navigator.toggleDrawer({
@@ -69,6 +65,14 @@ class HomeScreen extends Component {
         })
       }
     }
+    
+    if(event.type === "ScreenChangedEvent"){
+      if(event.id === "willAppear"){
+            this.getPetPhoto();
+            this.getPetName();
+      }
+    }
+
   }
   render(){
 

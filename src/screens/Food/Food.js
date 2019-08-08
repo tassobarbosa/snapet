@@ -26,13 +26,6 @@ class FoodScreen extends Component {
     meals: [],
   };
 
-  componentDidMount() {
-      this.getEvents();
-
-        global.checkBalanceTimer = setInterval(() => {
-          this.getEvents();
-        }, 20000)
-  }
 
   getEvents = () => {
     fetch(serverUrl+"meals.json")
@@ -64,11 +57,19 @@ class FoodScreen extends Component {
   };
 
   onNavigatorEvent = event => {
+    console.log(event)
     if(event.type === "NavBarButtonPress"){
       if(event.id === "sideDrawerToggle"){
         this.props.navigator.toggleDrawer({
           side: "left"
         })
+      }
+    }
+
+    if(event.type === "ScreenChangedEvent"){
+      if(event.id === "willAppear"){
+        console.log('pegando lista')
+          this.getEvents();
       }
     }
   }
