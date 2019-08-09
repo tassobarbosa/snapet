@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 
 import startMainTabs from '../MainTabs/startMainTabs';
-import backgroundImage from "../../assets/Images/login-screen.jpeg";
+import backgroundImage from "../../assets/Images/background.png";
 import DefaultInput from "../../Components/UI/DefaultInput";
 import DefaultButton from "../../Components/UI/DefaultButton";
 
@@ -23,9 +23,9 @@ loginHandler = () => {
 }
 
   render(){
-    const backgnd = "https://thehappypuppysite.com/wp-content/uploads/2019/05/cute-dog-quotes-HP-long.jpg";
+    //const backgnd = "https://thehappypuppysite.com/wp-content/uploads/2019/05/cute-dog-quotes-HP-long.jpg";
     return(
-      <ImageBackground source={{uri: backgnd}} style={styles.backgroundImage}>
+      <ImageBackground source={backgroundImage}  style={styles.backgroundImage}>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
               <View style={styles.inputContainer}>
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   backgroundImage: {
-    flex: 1,
+   flex: 1
   },
   inputContainer: {
     width: "80%"
