@@ -20,7 +20,8 @@ export default class CameraVideoModal extends Component {
             <View style={styles.buttonContainer}>
               <CloseButton onPress={this.props.onModalClosed} />
             </View>
-               <Video source={{uri: "http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4"}}   // Can be a URL or a local file.
+               {/* <Video source={{uri: "http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4"}}   // Can be a URL or a local file. */}
+               <Video source={{uri: "http://10.42.0.66/hls/index.m3u8"}}   // Can be a URL or a local file.
                    ref={(ref) => {
                      this.player = ref
                    }}                                      // Store reference
