@@ -13,7 +13,7 @@ import FoodButton from '../../Components/UI/FoodButton';
 import DefaultButton from "../../Components/UI/DefaultButton";
 import CommonStyles from '../../Stylesheets/Common';
 
-import { serverUrl, raspStaticIP } from '../../Config/Settings.js'
+import { serverUrl, raspStaticIP, raspWifiCasa } from '../../Config/Settings.js'
 
 
 class FoodScreen extends Component {
@@ -47,7 +47,7 @@ class FoodScreen extends Component {
   sendSignal = () => {
     console.log("Abrindo reservatorio...");
 
-    fetch(raspStaticIP+":3000/?porta4=1&porcao=3",{
+    fetch(raspWifiCasa+":3000/?porta4=1&porcao=3",{
       method: "POST",
       body: JSON.stringify({})
     })
