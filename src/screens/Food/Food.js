@@ -10,9 +10,10 @@ import FoodModal from './FoodModal';
 import FoodEventItem from './FoodEventItem';
 import FoodList from './FoodList';
 import FoodButton from '../../Components/UI/FoodButton';
+import DefaultButton from "../../Components/UI/DefaultButton";
 import CommonStyles from '../../Stylesheets/Common';
 
-import { serverUrl } from '../../Config/Settings.js'
+import { serverUrl, raspStaticIP } from '../../Config/Settings.js'
 
 
 class FoodScreen extends Component {
@@ -43,6 +44,17 @@ class FoodScreen extends Component {
     })
   }
 
+  sendSignal = () => {
+    console.log("Abrindo reservatorio...");
+
+    fetch(raspStaticIP+":3000/?porta4=1&porcao=3",{
+      method: "POST",
+      body: JSON.stringify({})
+    })
+    .catch(err => console.log(err))
+  }
+
+
   modalClosedHandler = () => {
     this.setState({
       modalVisible: null
@@ -55,6 +67,20 @@ class FoodScreen extends Component {
       modalVisible: true
     });
   };
+
+  foodAction = () => {
+    Alert.alert(
+    'Alimentação',
+    'Deseja alimentar seu pet?',
+      [
+        {},
+        {text: 'Cancelar', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+        {text: 'Sim!!', onPress: () => this.sendSignal()},
+      ],
+    {cancelable: true},
+    );
+  }
+
 
   onNavigatorEvent = event => {
     console.log(event)
@@ -123,6 +149,7 @@ class FoodScreen extends Component {
         </View>
 
           <View style={styles.buttonContainer}>
+            <DefaultButton label='Alimentar' style={[{width: "40%"}]} onPress={this.foodAction}/>
             <FoodButton onPress={this.modalOpenHandler}/>
           </View>
 
@@ -141,10 +168,12 @@ const styles = StyleSheet.create({
       padding: 10,
     },
     buttonContainer: {
-      width: "100%",
+      width: "60%",
+      flexDirection: 'row',
       marginBottom: 10,
-      justifyContent: 'center',
-      alignItems: "center"
+      alignSelf: 'center',
+      justifyContent: 'space-between',
+      alignItems: "center",
     }
 });
 
