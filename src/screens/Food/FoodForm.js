@@ -21,6 +21,8 @@ export default class FoodForm extends Component {
   state = {
     mealName: "",
     mealTime: '00:00',
+    mealHour: '0',
+    mealMin: '0',
     mealPortion: 1
   };
 
@@ -30,7 +32,7 @@ export default class FoodForm extends Component {
   }
 
   onUpdateTime(){
-    this.props.currentMealTime(this.state.mealTime);
+    this.props.currentMealTime(this.state);
   }
 
   onUpdateMealPortion(mealPortion){
@@ -50,7 +52,11 @@ export default class FoodForm extends Component {
         const m = (minute < 10) ? `0${minute}` : minute;
         const h = (hour < 10) ? `0${hour}` : hour;
         console.log(`time: ${hour}:${minute}`);
-        this.setState({ mealTime: `${h}:${m}` });
+        this.setState({
+          mealTime: `${h}:${m}`,
+          mealHour: `${h}`,
+          mealMin: `${m}`
+       });
         this.onUpdateTime();
       }
     } catch ({ code, message }) {

@@ -14,6 +14,8 @@ export default class FoodModal extends Component {
     this.state = {
         mealName: '',
         mealTime: '',
+        mealHour: '',
+        mealMin: '',
         mealPortion: 1
       };
   }
@@ -22,8 +24,12 @@ export default class FoodModal extends Component {
     this.setState({mealName});
   }
 
-  updateTime(mealTime){
-    this.setState({mealTime});
+  updateTime(mealState){
+    this.setState({
+      mealTime: mealState.mealTime,
+      mealHour: mealState.mealHour,
+      mealMin: mealState.mealMin,
+    });
   }
 
   updatePortion(mealPortion){
@@ -35,8 +41,8 @@ export default class FoodModal extends Component {
     console.log("enviando crontab do raspberry");
     fetch(raspWifiCasa+":3000/?nome="+this.state.mealName+
     "&porcao="+this.state.mealPortion+
-    "&hora="+this.state.mealTime+
-    "&min=13",{
+    "&hora="+this.state.mealHour+
+    "&min="+this.state.mealMin,{
       method: "POST",
       body: JSON.stringify({})
     })
