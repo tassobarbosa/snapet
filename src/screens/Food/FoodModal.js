@@ -6,7 +6,7 @@ import FoodForm from './FoodForm';
 import CommonStyles from '../../Stylesheets/Common';
 import DefaultButton from "../../Components/UI/DefaultButton";
 
-import { serverUrl } from '../../Config/Settings.js'
+import { serverUrl, raspStaticIP, raspWifiCasa } from '../../Config/Settings.js'
 
 export default class FoodModal extends Component {
   constructor(props) {
@@ -31,8 +31,18 @@ export default class FoodModal extends Component {
   }
 
   submitHandler = () => {
-    console.log("hey");
 
+    console.log("enviando crontab do raspberry");
+    fetch(raspWifiCasa+":3000/?nome="+this.state.mealName+
+    "&porcao="+this.state.mealPortion+
+    "&hora="+this.state.mealTime+
+    "&min=13",{
+      method: "POST",
+      body: JSON.stringify({})
+    })
+    .catch(err => console.log(err))
+
+    console.log("enviando firebase");
     fetch(serverUrl+"meals.json",{
       method: "POST",
       body: JSON.stringify({
