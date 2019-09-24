@@ -99,10 +99,10 @@ class FoodScreen extends Component {
     }
   }
 
-  eventSelectedHandler = key => {
+  eventSelectedHandler = item => {
 
     const selMeal = this.state.meals.find(meal =>  {
-      return meal.key === key;
+      return meal.key === item.key;
     });
 
     if(selMeal) console.log(selMeal)
@@ -113,21 +113,28 @@ class FoodScreen extends Component {
         [
           {},
           {text: 'Cancelar', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-          {text: 'OK', onPress: () => this.deleteEvent(key)},
+          {text: 'OK', onPress: () => this.deleteEvent(item)},
         ],
       {cancelable: true},
     );
   }
 
-  deleteEvent(key){
+  deleteEvent(item){
     console.log("Delete pressed");
-    console.log(key);
+    console.log(item.key);
+    console.log(item.chosenName);
 
-      fetch(serverUrl + 'meals/' + key + '.json', {
+      fetch(serverUrl + 'meals/' + item.key + '.json', {
         method: "DELETE"
       })
       .catch(err => console.log(err))
       .then(res => res.json())
+
+      fetch(raspWifiCasa+":3000/?nome="+item.chosenName,{
+        method: "POST",
+        body: JSON.stringify({})
+      })
+      .catch(err => console.log(err))
 
       this.getEvents();
   }

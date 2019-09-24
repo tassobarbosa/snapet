@@ -14,7 +14,7 @@ const foodList = props => {
               mealName={info.item.chosenName}
               mealTime={info.item.chosenTime}
               mealPortion={info.item.chosenPortion}
-              onItemPressed={() => props.onItemSelected(info.item.key)}
+              onItemPressed={() => props.onItemSelected(info.item)}
              />
           )}
         />
