@@ -168,7 +168,6 @@ class FoodScreen extends Component {
           raspberryDIP ={this.state.rasperryDynamicIp}
         />
         <FoodHeader />
-        <Text>{this.state.rasperryDynamicIp}</Text>
         <View style={styles.bodyContainer}>
           <FoodList
             meals={this.state.meals}

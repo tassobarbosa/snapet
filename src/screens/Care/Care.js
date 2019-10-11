@@ -23,7 +23,7 @@ class CareScreen extends Component {
       };
   }
 
-  onNavigatorEvent = event => {    
+  onNavigatorEvent = event => {
     if(event.type === "NavBarButtonPress"){
       if(event.id === "sideDrawerToggle"){
         this.props.navigator.toggleDrawer({
@@ -108,8 +108,8 @@ class CareScreen extends Component {
         <CareButton name='Banho e Tosa' iconName='md-cut' onPress={this.goToPetshop}/>
         <CareButton name='Veterinário' iconName='md-medkit' onPress={this.goToVeterinario}/>
         <CareButton name='Cartão de vacinas' iconName='md-pulse' onPress={this.goToVacinas}/>
-        <CareButton name='Banho Chart' iconName='md-cut' onPress={this.handleToggleChart}/>
-        <CareChart showChart={this.state.showChart}/>
+        {/* <CareButton name='Banho Chart' iconName='md-cut' onPress={this.handleToggleChart}/>
+        <CareChart showChart={this.state.showChart}/> */}
       </View>
     );
   }

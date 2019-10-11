@@ -4,6 +4,8 @@ import { RNCamera } from 'react-native-camera';
 import CameraVideoModal from "./CameraVideoModal";
 import DefaultButton from "../../Components/UI/DefaultButton";
 
+import { serverUrl, raspStaticIP, raspWifiCasa } from '../../Config/Settings.js'
+
 class CameraScreen extends Component {
   constructor(props){
     super(props);
@@ -11,7 +13,28 @@ class CameraScreen extends Component {
   }
 
   state = {
-    videoVisible: null
+    videoVisible: null,
+        rasperryDynamicIp: ''
+  }
+
+
+  getRaspberryIp = () => {
+    fetch(serverUrl+"userdata.json")
+    .then(res => res.json())
+    .then(parsedRes => {
+      console.log(parsedRes)
+      const dataEvents = [];
+      for(let key in parsedRes){
+        dataEvents.push({
+          ...parsedRes[key],
+          key: key
+        })
+      }
+       this.setState({
+         rasperryDynamicIp: 'http://'+dataEvents[0].raspberryIp
+     });
+
+    })
   }
 
   onNavigatorEvent = event => {
@@ -21,6 +44,12 @@ class CameraScreen extends Component {
         this.props.navigator.toggleDrawer({
           side: "left"
         })
+      }
+    }
+
+    if(event.type === "ScreenChangedEvent"){
+      if(event.id === "willAppear"){
+          this.getRaspberryIp();
       }
     }
   }
@@ -43,6 +72,7 @@ class CameraScreen extends Component {
         <CameraVideoModal
           onModalClosed={this.videoClosedHandler}
           videoVisible={this.state.videoVisible}
+          raspberryDIP ={this.state.rasperryDynamicIp}
         />
       )
     }
