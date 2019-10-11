@@ -27,6 +27,7 @@ class DadosUserScreen extends Component {
     userName: '',
     userEmail: '',
     birthDate: '',
+    raspberryIp: '',
     encodedData: '',
     key: ''
   };
@@ -63,6 +64,7 @@ class DadosUserScreen extends Component {
          userName: dataEvents[0].userName,
          userEmail: dataEvents[0].userEmail,
          birthDate: dataEvents[0].birthDate,
+         raspberryIp: dataEvents[0].raspberryIp,
          key: dataEvents[0].key
      });
 
@@ -162,6 +164,11 @@ class DadosUserScreen extends Component {
            <View style={styles.informationLine}>
              <Text style={styles.textTitle}>Nascimento: </Text>
              <Text style={styles.textInfo}>{this.state.birthDate}</Text>
+           </View>
+
+           <View style={styles.informationLine}>
+             <Text style={styles.textTitle}>Ip do Dispositivo: </Text>
+             <Text style={styles.textInfo}>{this.state.raspberryIp}</Text>
            </View>
 
            <View style={styles.informationLine}>

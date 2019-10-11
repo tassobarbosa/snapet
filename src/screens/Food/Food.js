@@ -13,7 +13,7 @@ import FoodButton from '../../Components/UI/FoodButton';
 import DefaultButton from "../../Components/UI/DefaultButton";
 import CommonStyles from '../../Stylesheets/Common';
 
-import { serverUrl, raspStaticIP, raspWifiCasa } from '../../Config/Settings.js'
+import { serverUrl, raspDynamicIp, raspStaticIP, raspWifiCasa } from '../../Config/Settings.js'
 
 
 class FoodScreen extends Component {
@@ -25,6 +25,7 @@ class FoodScreen extends Component {
   state = {
     modalVisible: null,
     meals: [],
+    raspIpNumber: ''
   };
 
 

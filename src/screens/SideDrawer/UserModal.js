@@ -13,7 +13,8 @@ export default class UserModal extends Component {
     this.state = {
       userName: '',
       userEmail: '',
-      birthDate: ''
+      birthDate: '',
+      raspberryIp: ''
       };
   }
 
@@ -23,6 +24,10 @@ export default class UserModal extends Component {
 
   updateEmail(userEmail){
     this.setState({userEmail});
+  }
+
+  updateRaspberryIp(raspberryIp){
+    this.setState({raspberryIp});
   }
 
   updateBirth(birthDate){
@@ -40,6 +45,7 @@ export default class UserModal extends Component {
           userName: this.state.userName,
           userEmail: this.state.userEmail,
           birthDate: this.state.birthDate,
+          raspberryIp: this.state.raspberryIp,
         })
       })
       .catch(err => console.log(err))
@@ -55,7 +61,8 @@ export default class UserModal extends Component {
     this.setState({
       userName: '',
       userEmail: '',
-      birthDate: ''
+      birthDate: '',
+
     });
   }
 
@@ -86,6 +93,7 @@ export default class UserModal extends Component {
             currentUserName = {this.updateName.bind(this)}
             currentUserEmail = {this.updateEmail.bind(this)}
             currentBirthDate = {this.updateBirth.bind(this)}
+            currentRaspberryIp = {this.updateRaspberryIp.bind(this)}
           />
         </View>
       </Modal>

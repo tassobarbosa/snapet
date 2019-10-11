@@ -23,6 +23,7 @@ export default class UserForm extends Component {
         androidDate: `${new Date().getUTCDate()}/${new Date().getUTCMonth() + 1}/${new Date().getUTCFullYear()}`,
         userName: '',
         userEmail: '',
+        raspberryIp: ''
       };
   }
 
@@ -56,7 +57,10 @@ export default class UserForm extends Component {
     this.setState({userEmail});
     this.props.currentUserEmail(userEmail);
   }
-
+  onUpdateRaspberryIp(raspberryIp){
+    this.setState({raspberryIp});
+    this.props.currentRaspberryIp(raspberryIp);
+  }
   onUpdateBirthDate(){
     this.props.currentBirthDate(this.state.androidDate);
   }
@@ -89,6 +93,14 @@ export default class UserForm extends Component {
                 </Text>
               </View>
             </TouchableOpacity>
+
+            <TextInput
+                style={[styles.pickerContainer, styles.inputText]}
+                placeholder='Ip do dispositivo'
+                onChangeText={value => this.onUpdateRaspberryIp(value)}
+                value={this.state.raspberryIp}
+                underlineColorAndroid="transparent"
+              />
           </KeyboardAvoidingView>
         </ScrollView>
     )
