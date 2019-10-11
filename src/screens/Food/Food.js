@@ -13,7 +13,7 @@ import FoodButton from '../../Components/UI/FoodButton';
 import DefaultButton from "../../Components/UI/DefaultButton";
 import CommonStyles from '../../Stylesheets/Common';
 
-import { serverUrl, raspDynamicIp, raspStaticIP, raspWifiCasa } from '../../Config/Settings.js'
+import { serverUrl, raspStaticIP, raspWifiCasa } from '../../Config/Settings.js'
 
 
 class FoodScreen extends Component {
@@ -25,9 +25,27 @@ class FoodScreen extends Component {
   state = {
     modalVisible: null,
     meals: [],
-    raspIpNumber: ''
+    rasperryDynamicIp: ''
   };
 
+  getRaspberryIp = () => {
+    fetch(serverUrl+"userdata.json")
+    .then(res => res.json())
+    .then(parsedRes => {
+      console.log(parsedRes)
+      const dataEvents = [];
+      for(let key in parsedRes){
+        dataEvents.push({
+          ...parsedRes[key],
+          key: key
+        })
+      }
+       this.setState({
+         rasperryDynamicIp: 'http://'+dataEvents[0].raspberryIp
+     });
+
+    })
+  }
 
   getEvents = () => {
     fetch(serverUrl+"meals.json")
@@ -48,7 +66,7 @@ class FoodScreen extends Component {
   sendSignal = () => {
     console.log("Abrindo reservatorio...");
 
-    fetch(raspWifiCasa+":3000/?porta4=1&porcao=3",{
+    fetch(this.state.rasperryDynamicIp+":3000/?porta4=1&porcao=3",{
       method: "POST",
       body: JSON.stringify({})
     })
@@ -95,6 +113,7 @@ class FoodScreen extends Component {
 
     if(event.type === "ScreenChangedEvent"){
       if(event.id === "willAppear"){
+          this.getRaspberryIp();
           this.getEvents();
       }
     }
@@ -131,7 +150,7 @@ class FoodScreen extends Component {
       .catch(err => console.log(err))
       .then(res => res.json())
 
-      fetch(raspWifiCasa+":3000/?nome="+item.chosenName,{
+      fetch(this.state.rasperryDynamicIp+":3000/?nome="+item.chosenName,{
         method: "POST",
         body: JSON.stringify({})
       })
@@ -148,7 +167,7 @@ class FoodScreen extends Component {
           onModalClosed={this.modalClosedHandler}
         />
         <FoodHeader />
-
+        <Text>{this.state.rasperryDynamicIp}</Text>
         <View style={styles.bodyContainer}>
           <FoodList
             meals={this.state.meals}
