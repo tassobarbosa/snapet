@@ -39,7 +39,7 @@ export default class FoodModal extends Component {
   submitHandler = () => {
 
     console.log("enviando crontab do raspberry");
-    fetch(raspWifiCasa+":3000/?nome="+this.state.mealName+
+    fetch(this.props.raspberryDIP+":3000/?nome="+this.state.mealName+
     "&porcao="+this.state.mealPortion+
     "&hora="+this.state.mealHour+
     "&min="+this.state.mealMin,{

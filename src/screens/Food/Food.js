@@ -165,6 +165,7 @@ class FoodScreen extends Component {
         <FoodModal
           openModal={this.state.modalVisible}
           onModalClosed={this.modalClosedHandler}
+          raspberryDIP ={this.state.rasperryDynamicIp}
         />
         <FoodHeader />
         <Text>{this.state.rasperryDynamicIp}</Text>
