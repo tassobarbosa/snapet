@@ -13,6 +13,7 @@ const foodList = props => {
             <FoodList
               mealName={info.item.chosenName}
               mealTime={info.item.chosenTime}
+              mealType={info.item.chosenType}
               mealPortion={info.item.chosenPortion}
               onItemPressed={() => props.onItemSelected(info.item)}
              />

@@ -25,7 +25,7 @@ export default class FoodForm extends Component {
     mealHour: '0',
     mealMin: '0',
     mealPortion: 1,
-    mealType: 3,
+    mealType: 'G',
   };
 
   onUpdateMealName(mealName){
@@ -97,20 +97,20 @@ export default class FoodForm extends Component {
           <View style={styles.radioContainer}>
             <RadioButton
               value="pequena"
-              status={this.state.mealType === 1 ? 'checked' : 'unchecked'}
-              onPress={() => this.onUpdateMealType(1)}
+              status={this.state.mealType === 'P' ? 'checked' : 'unchecked'}
+              onPress={() => this.onUpdateMealType('P')}
             />
             <View><Text style={styles.textItem}>Pequena</Text></View>
             <RadioButton
               value="media"
-              status={this.state.mealType === 2 ? 'checked' : 'unchecked'}
-              onPress={() => this.onUpdateMealType(2)}
+              status={this.state.mealType === 'M' ? 'checked' : 'unchecked'}
+              onPress={() => this.onUpdateMealType('M')}
             />
             <View><Text style={styles.textItem}>Média</Text></View>
             <RadioButton
               value="grande"
-              status={this.state.mealType === 3 ? 'checked' : 'unchecked'}
-              onPress={() => this.onUpdateMealType(3)}
+              status={this.state.mealType === 'G' ? 'checked' : 'unchecked'}
+              onPress={() => this.onUpdateMealType('G')}
             />
             <View><Text style={styles.textItem}>Grande</Text></View>
           </View>

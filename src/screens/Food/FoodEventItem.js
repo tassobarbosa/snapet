@@ -16,6 +16,9 @@ const foodEventItem = (props) => (
         <Text style={styles.textItem}>{props.mealPortion}</Text>
         <Text style={styles.textTitle}>porções</Text>
       </View>
+      <View style={styles.itemField}>
+        <Text style={styles.textItem}>{props.mealType}</Text>
+      </View>
     </View>
   </TouchableOpacity>
 );
@@ -35,7 +38,7 @@ const styles = StyleSheet.create({
         borderColor: '#d6d7da',
     },
     itemField: {
-      width: "33%",
+      width: "25%",
     },
     textItem: {
       fontSize: 26,

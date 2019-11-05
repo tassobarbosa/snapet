@@ -17,7 +17,7 @@ export default class FoodModal extends Component {
         mealHour: '',
         mealMin: '',
         mealPortion: 1,
-        mealType: 3
+        mealType: 'G'
       };
   }
 
@@ -80,7 +80,7 @@ export default class FoodModal extends Component {
       mealName: '',
       mealTime: '',
       mealTime: 1,
-      mealType: 3
+      mealType: 'G'
     });
   }
 
