@@ -16,7 +16,8 @@ export default class FoodModal extends Component {
         mealTime: '',
         mealHour: '',
         mealMin: '',
-        mealPortion: 1
+        mealPortion: 1,
+        mealType: 3
       };
   }
 
@@ -36,11 +37,16 @@ export default class FoodModal extends Component {
     this.setState({mealPortion});
   }
 
+  updateType(mealType){
+    this.setState({mealType});
+  }
+
   submitHandler = () => {
 
     console.log("enviando crontab do raspberry");
     fetch(this.props.raspberryDIP+":3000/?nome="+this.state.mealName+
     "&porcao="+this.state.mealPortion+
+    "&tipo="+this.state.mealType+
     "&hora="+this.state.mealHour+
     "&min="+this.state.mealMin,{
       method: "POST",
@@ -57,6 +63,7 @@ export default class FoodModal extends Component {
         chosenName: this.state.mealName,
         chosenTime: this.state.mealTime,
         chosenPortion: this.state.mealPortion,
+        chosenType: this.state.mealType,
       })
     })
     .catch(err => console.log(err))
@@ -72,7 +79,8 @@ export default class FoodModal extends Component {
     this.setState({
       mealName: '',
       mealTime: '',
-      mealTime: 1
+      mealTime: 1,
+      mealType: 3
     });
   }
 
@@ -93,6 +101,8 @@ export default class FoodModal extends Component {
               currentMealName = {this.updateName.bind(this)}
               currentMealTime={this.updateTime.bind(this)}
               currentMealPortion={this.updatePortion.bind(this)}
+              currentMealType={this.updateType.bind(this)}
+
             />
           </View>
         </Modal>

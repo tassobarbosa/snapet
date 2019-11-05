@@ -25,7 +25,7 @@ export default class FoodForm extends Component {
     mealHour: '0',
     mealMin: '0',
     mealPortion: 1,
-    mealType: 'grande',
+    mealType: 3,
   };
 
   onUpdateMealName(mealName){
@@ -40,6 +40,11 @@ export default class FoodForm extends Component {
   onUpdateMealPortion(mealPortion){
     this.setState({mealPortion});
     this.props.currentMealPortion(mealPortion);
+  }
+
+  onUpdateMealType(mealType){
+    this.setState({mealType});
+    this.props.currentMealType(mealType);
   }
 
   setTimeAndroid = async () => {
@@ -91,21 +96,21 @@ export default class FoodForm extends Component {
           <View style={styles.titleContainer}><Text style={styles.textTitle}>Tamanho da ração</Text></View>
           <View style={styles.radioContainer}>
             <RadioButton
-              value="first"
-              status={this.state.mealType === 'pequena' ? 'checked' : 'unchecked'}
-              onPress={() => { this.setState({ mealType: 'pequena' }); }}
+              value="pequena"
+              status={this.state.mealType === 1 ? 'checked' : 'unchecked'}
+              onPress={() => this.onUpdateMealType(1)}
             />
             <View><Text style={styles.textItem}>Pequena</Text></View>
             <RadioButton
-              value="second"
-              status={this.state.mealType === 'media' ? 'checked' : 'unchecked'}
-              onPress={() => { this.setState({ mealType: 'media' }); }}
+              value="media"
+              status={this.state.mealType === 2 ? 'checked' : 'unchecked'}
+              onPress={() => this.onUpdateMealType(2)}
             />
             <View><Text style={styles.textItem}>Média</Text></View>
             <RadioButton
-              value="second"
-              status={this.state.mealType === 'grande' ? 'checked' : 'unchecked'}
-              onPress={() => { this.setState({ mealType: 'grande' }); }}
+              value="grande"
+              status={this.state.mealType === 3 ? 'checked' : 'unchecked'}
+              onPress={() => this.onUpdateMealType(3)}
             />
             <View><Text style={styles.textItem}>Grande</Text></View>
           </View>
