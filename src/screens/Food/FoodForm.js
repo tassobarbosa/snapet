@@ -16,6 +16,7 @@ import Slider from '@react-native-community/slider';
 import Icon from "react-native-vector-icons/Ionicons";
 import CommonStyles from '../../Stylesheets/Common';
 import FoodImage from '../../assets/Images/comida.jpeg';
+import { RadioButton } from 'react-native-paper';
 
 export default class FoodForm extends Component {
   state = {
@@ -23,7 +24,8 @@ export default class FoodForm extends Component {
     mealTime: '00:00',
     mealHour: '0',
     mealMin: '0',
-    mealPortion: 1
+    mealPortion: 1,
+    mealType: 'grande',
   };
 
   onUpdateMealName(mealName){
@@ -85,6 +87,29 @@ export default class FoodForm extends Component {
             </View>
           </TouchableOpacity>
 
+
+          <View style={styles.titleContainer}><Text style={styles.textTitle}>Tamanho da ração</Text></View>
+          <View style={styles.radioContainer}>
+            <RadioButton
+              value="first"
+              status={this.state.mealType === 'pequena' ? 'checked' : 'unchecked'}
+              onPress={() => { this.setState({ mealType: 'pequena' }); }}
+            />
+            <View><Text style={styles.textItem}>Pequena</Text></View>
+            <RadioButton
+              value="second"
+              status={this.state.mealType === 'media' ? 'checked' : 'unchecked'}
+              onPress={() => { this.setState({ mealType: 'media' }); }}
+            />
+            <View><Text style={styles.textItem}>Média</Text></View>
+            <RadioButton
+              value="second"
+              status={this.state.mealType === 'grande' ? 'checked' : 'unchecked'}
+              onPress={() => { this.setState({ mealType: 'grande' }); }}
+            />
+            <View><Text style={styles.textItem}>Grande</Text></View>
+          </View>
+
       <View style={styles.sliderContainer}>
         <Slider
           style={styles.sliderStyle}
@@ -138,6 +163,15 @@ const styles = StyleSheet.create({
   iconPicker: {
     marginRight: 20
   },
+  titleContainer: {
+    paddingTop: 12,
+    paddingBottom: 5,
+  },
+  radioContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
   sliderStyle: {
     width: "100%",
   },
@@ -154,7 +188,7 @@ const styles = StyleSheet.create({
     paddingTop: 10,
 },
 textTitle: {
-  fontSize: 18,
+  fontSize: 20,
   fontWeight: 'bold',
   textAlign: 'center',
 }

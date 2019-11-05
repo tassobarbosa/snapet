@@ -166,11 +166,6 @@ class DadosPetScreen extends Component {
             <Text style={styles.textTitle}>Nascimento: </Text>
             <Text style={styles.textInfo}>{this.state.petBirth}</Text>
           </View>
-
-          <View style={styles.informationLine}>
-            <Text style={styles.textTitle}>Chave: </Text>
-            <Text style={styles.textInfo}>{this.state.key}</Text>
-          </View>
        </View>
 
         <View style={styles.buttonContainer}>

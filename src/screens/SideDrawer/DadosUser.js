@@ -170,11 +170,6 @@ class DadosUserScreen extends Component {
              <Text style={styles.textTitle}>Ip do Dispositivo: </Text>
              <Text style={styles.textInfo}>{this.state.raspberryIp}</Text>
            </View>
-
-           <View style={styles.informationLine}>
-             <Text style={styles.textTitle}>Chave: </Text>
-             <Text style={styles.textInfo}>{this.state.key}</Text>
-           </View>
         </View>
 
          <View style={styles.buttonContainer}>
